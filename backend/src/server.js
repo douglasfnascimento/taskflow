@@ -1,12 +1,17 @@
-import { createServer } from 'http'
+import { createServer } from 'node:http'
+import { sendResponse } from '../utils/sendResponse.js'
+import { getTasks } from '../handlers/tasks/getTasks.js'
 
 const port = 8000
-const server = createServer((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 
-    res.end(JSON.stringify({ message: 'Servidor rodando com sucesso!' }))
+const server = createServer(async (req, res) => {
+
+    if (req.url === '/tasks' && req.method === 'GET') {
+        getTasks(req, res)
+    } else if (req.method === 'OPTIONS') {
+        sendResponse(res, 204)
+    }
+
 })
 
 server.listen(port, () => console.log(`Server running at port ${port}`))
