@@ -1,1 +1,64 @@
-[]
+[
+  {
+    "title": "Estudar Node.js",
+    "description": "Revisar async/await e fs",
+    "status": "todo",
+    "priority": 2,
+    "tags": [
+      "estudos",
+      "backend"
+    ],
+    "dueDate": "2025-09-25T00:00:00.000Z",
+    "createdAt": "2025-09-21T06:11:39.296Z",
+    "id": "1758435099296-v07xgo"
+  },
+  {
+    "title": "Estudar Node.js",
+    "description": "Revisar async/await e fs",
+    "status": "todo",
+    "priority": 2,
+    "tags": [
+      "estudos",
+      "backend"
+    ],
+    "dueDate": "2025-09-25T00:00:00.000Z",
+    "createdAt": "2025-09-21T06:12:21.001Z",
+    "id": "1758435141001-7fzxe4"
+  },
+  {
+    "title": "Dormir, pois está tarde",
+    "description": "",
+    "status": "todo",
+    "priority": 1,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-21T06:13:04.405Z",
+    "id": "1758435184406-bkfy42"
+  },
+  {
+    "title": "Estudar Node.js",
+    "description": "Revisar async/await e fs",
+    "status": "todo",
+    "priority": 1,
+    "tags": [
+      "estudos",
+      "backend"
+    ],
+    "dueDate": "2025-09-25T00:00:00.000Z",
+    "createdAt": "2025-09-21T06:15:40.164Z",
+    "id": "1758435340164-en8dnv"
+  },
+  {
+    "title": "Estudar Node.js",
+    "description": "Revisar async/await e fs",
+    "status": "todo",
+    "priority": 2,
+    "tags": [
+      "estudos",
+      "backend"
+    ],
+    "dueDate": "2025-09-25T00:00:00.000Z",
+    "createdAt": "2025-09-21T06:15:53.684Z",
+    "id": "1758435353684-gok2sp"
+  }
+]

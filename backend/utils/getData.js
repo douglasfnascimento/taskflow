@@ -1,12 +1,9 @@
 import fs from 'node:fs/promises'
-//import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-
-const tasksFileUrl = new URL('../data/tasks.json', import.meta.url)
+import { getFilePath } from './getFilePath.js'
 
 export async function getData() {
     try {
-        const tasksFilePath = fileURLToPath(tasksFileUrl)
+        const tasksFilePath = getFilePath('../data/tasks.json')
         const data = await fs.readFile(tasksFilePath, 'utf-8')
         return JSON.parse(data)
     } catch (err) {
