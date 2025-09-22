@@ -2,6 +2,9 @@ import { createServer } from 'node:http'
 import { sendResponse } from '../utils/sendResponse.js'
 import { getTasks } from '../handlers/tasks/getTasks.js'
 import { createTask } from '../handlers/tasks/createTask.js'
+import { updateTask } from '../handlers/tasks/updateTask.js'
+import { deleteTask } from '../handlers/tasks/deleteTask.js'
+
 
 const port = 8000
 
@@ -10,10 +13,16 @@ const server = createServer(async (req, res) => {
         await getTasks(req, res)
     } else if (req.url === '/tasks' && req.method === 'POST') {
         await createTask(req, res)
+    } else if (req.url.startsWith('/tasks/') && req.method === 'PUT') {
+        const id = req.url.split('/')[2]
+        await updateTask(req, res, id)
+    } else if (req.url.startsWith('/tasks/') && req.method === 'DELETE') {
+        const id = req.url.split('/')[2]
+        await deleteTask(req, res, id)
     } else if (req.method === 'OPTIONS') {
-        sendResponse(res, 204)
+        sendResponse(res, { statusCode: 204 })
     } else {
-        sendResponse(res, 404, { message: 'Not found' })
+        sendResponse(res, { statusCode: 404, data: { message: 'Not found' } })
     }
 })
 

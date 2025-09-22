@@ -1,4 +1,4 @@
-export async function sendResponse(res, statusCode, data, contentType) {
+export async function sendResponse(res, { statusCode = 200, data = {}, contentType = "application/json" } = {}) {
     // mudar os parametros futuramente e colocar data e contentType como um objeto opcional
     const response = data || {}
     res.setHeader('Access-Control-Allow-Origin', '*')

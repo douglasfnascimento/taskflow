@@ -18,8 +18,8 @@ export async function createTask(req, res) {
         tasks.push(newTask)
         await saveData(tasks)
 
-        sendResponse(res, 201, newTask)
+        sendResponse(res, { statusCode: 201, data: newTask })
     } catch (err) {
-        sendResponse(res, 400, { message: err.message })
+        sendResponse(res, { statusCode: 400, data: { message: err.message } })
     }
 }
