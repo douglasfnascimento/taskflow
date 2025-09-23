@@ -1,41 +1,65 @@
 [
   {
-    "title": "Estudar Swift",
-    "description": "Revisar async/await e fs",
+    "title": "Preparar apresentação de produto",
+    "description": "Revisar os slides, adicionar gráficos de vendas e atualizar cronograma do lançamento. Ensaiar fala antes da reunião com a diretoria.",
     "status": "todo",
-    "priority": 2,
-    "tags": [
-      "estudos",
-      "backend"
-    ],
-    "dueDate": "2025-09-25T00:00:00.000Z",
+    "priority": 1,
+    "tags": ["trabalho", "apresentação"],
+    "dueDate": "2025-09-24T09:00:00.000Z",
     "id": "1758435099296-v07xgo",
-    "createdAt": "2025-09-21T06:11:39.296Z"
+    "createdAt": "2025-09-21T08:00:00.000Z"
   },
   {
-    "title": "Estudar Node.js",
-    "description": "Revisar async/await e fs",
-    "status": "todo",
-    "priority": 2,
-    "tags": [
-      "estudos",
-      "backend"
-    ],
-    "dueDate": "2025-09-25T00:00:00.000Z",
-    "createdAt": "2025-09-21T06:12:21.001Z",
-    "id": "1758435141001-7fzxe4"
-  },
-  {
-    "title": "Acordar paras trabalhar",
-    "description": "muito soninho",
+    "title": "Comprar mantimentos",
+    "description": "Frutas, vegetais, leite, pão, ovos e café. Verificar promoções no mercado antes de sair.",
     "status": "doing",
     "priority": 2,
-    "tags": [
-      "estudos",
-      "backend"
-    ],
-    "dueDate": "2025-09-23T00:00:00.000Z",
+    "tags": ["pessoal", "compras"],
+    "dueDate": "2025-09-22T18:00:00.000Z",
+    "id": "1758435141001-7fzxe4",
+    "createdAt": "2025-09-21T09:00:00.000Z"
+  },
+  {
+    "title": "Leitura diária",
+    "status": "done",
+    "priority": 3,
+    "tags": ["pessoal", "hábito"],
+    "dueDate": "2025-09-21T22:00:00.000Z",
     "id": "1758435184406-bkfy42",
-    "createdAt": "2025-09-21T06:13:04.405Z"
+    "createdAt": "2025-09-21T07:30:00.000Z"
+  },
+  {
+    "title": "Organizar arquivos do projeto",
+    "description": "Separar pastas por módulo, renomear arquivos inconsistentes e criar README explicando estrutura.",
+    "status": "todo",
+    "priority": 2,
+    "tags": ["trabalho", "backend"],
+    "id": "1758435225000-xk12as",
+    "createdAt": "2025-09-21T10:00:00.000Z"
+  },
+  {
+    "title": "Exercícios físicos",
+    "description": "Treino de 45 minutos: aquecimento, circuito de força, alongamento final. Alternar exercícios de braço e perna.",
+    "status": "doing",
+    "priority": 1,
+    "dueDate": "2025-09-22T07:00:00.000Z",
+    "id": "1758435263000-hg8kq1",
+    "createdAt": "2025-09-21T06:45:00.000Z"
+  },
+  {
+    "title": "Revisar notas da aula de JavaScript",
+    "status": "todo",
+    "priority": 2,
+    "tags": ["estudos"],
+    "id": "1758435300000-nz91qx",
+    "createdAt": "2025-09-21T07:00:00.000Z"
+  },
+  {
+    "title": "Planejar viagem de fim de semana",
+    "description": "Pesquisar hotéis, roteiros, clima e transporte. Fazer checklist de itens a levar e definir orçamento.",
+    "status": "todo",
+    "priority": 3,
+    "id": "1758435341000-lp53ta",
+    "createdAt": "2025-09-21T08:30:00.000Z"
   }
 ]
