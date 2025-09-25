@@ -15,3 +15,23 @@ export async function getTasks() {
         }
     }
 }
+
+export async function createTask(task) {
+    try {
+        const response = await fetch("http://localhost:8000/tasks", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(task),
+        });
+
+        if (!response.ok) {
+            throw new Error("Falha ao enviar task");
+        }
+
+        return await response.json();
+    } catch (err) {
+        throw new Error(err.message || "Não foi possível conectar ao servidor");
+    }
+}

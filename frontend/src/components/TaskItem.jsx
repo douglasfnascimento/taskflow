@@ -68,8 +68,11 @@ export default function TaskItem({ task }) {
 
         {task.tags && (
           <div className="flex gap-3">
-            {task.tags.map((tag) => (
-              <span className="text-xl italic border px-2 py-0.5 text-white rounded-xl w-max inline-block bg-gray-400 border-gray-400">
+            {task.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="text-xl italic border px-2 py-0.5 text-white rounded-xl w-max inline-block bg-gray-400 border-gray-400"
+              >
                 {tag}
               </span>
             ))}

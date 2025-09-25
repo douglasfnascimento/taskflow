@@ -4,7 +4,10 @@
     "description": "Revisar os slides, adicionar gráficos de vendas e atualizar cronograma do lançamento. Ensaiar fala antes da reunião com a diretoria.",
     "status": "todo",
     "priority": 1,
-    "tags": ["trabalho", "apresentação"],
+    "tags": [
+      "trabalho",
+      "apresentação"
+    ],
     "dueDate": "2025-09-24T09:00:00.000Z",
     "id": "1758435099296-v07xgo",
     "createdAt": "2025-09-21T08:00:00.000Z"
@@ -14,7 +17,10 @@
     "description": "Frutas, vegetais, leite, pão, ovos e café. Verificar promoções no mercado antes de sair.",
     "status": "doing",
     "priority": 2,
-    "tags": ["pessoal", "compras"],
+    "tags": [
+      "pessoal",
+      "compras"
+    ],
     "dueDate": "2025-09-22T18:00:00.000Z",
     "id": "1758435141001-7fzxe4",
     "createdAt": "2025-09-21T09:00:00.000Z"
@@ -23,7 +29,10 @@
     "title": "Leitura diária",
     "status": "done",
     "priority": 3,
-    "tags": ["pessoal", "hábito"],
+    "tags": [
+      "pessoal",
+      "hábito"
+    ],
     "dueDate": "2025-09-21T22:00:00.000Z",
     "id": "1758435184406-bkfy42",
     "createdAt": "2025-09-21T07:30:00.000Z"
@@ -33,7 +42,10 @@
     "description": "Separar pastas por módulo, renomear arquivos inconsistentes e criar README explicando estrutura.",
     "status": "todo",
     "priority": 2,
-    "tags": ["trabalho", "backend"],
+    "tags": [
+      "trabalho",
+      "backend"
+    ],
     "id": "1758435225000-xk12as",
     "createdAt": "2025-09-21T10:00:00.000Z"
   },
@@ -50,7 +62,9 @@
     "title": "Revisar notas da aula de JavaScript",
     "status": "todo",
     "priority": 2,
-    "tags": ["estudos"],
+    "tags": [
+      "estudos"
+    ],
     "id": "1758435300000-nz91qx",
     "createdAt": "2025-09-21T07:00:00.000Z"
   },
@@ -61,5 +75,95 @@
     "priority": 3,
     "id": "1758435341000-lp53ta",
     "createdAt": "2025-09-21T08:30:00.000Z"
+  },
+  {
+    "title": "Task de teste",
+    "description": "Esse é o teste de uma nova tarefa",
+    "status": "todo",
+    "priority": 3,
+    "tags": [],
+    "dueDate": "2025-09-26T00:00:00.000Z",
+    "createdAt": "2025-09-25T01:34:14.175Z",
+    "id": "1758764054175-ntonmh"
+  },
+  {
+    "title": "Essa é mais uma tarefa de testes",
+    "description": "Vamos ver se ela vai funcionar como esperado",
+    "status": "todo",
+    "priority": 2,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-25T01:55:48.255Z",
+    "id": "1758765348255-n0j617"
+  },
+  {
+    "title": "ABC",
+    "description": "DEF",
+    "status": "todo",
+    "priority": 3,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-25T02:53:48.283Z",
+    "id": "1758768828283-i9losv"
+  },
+  {
+    "title": "ABC",
+    "description": "",
+    "status": "todo",
+    "priority": 1,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-25T02:55:01.393Z",
+    "id": "1758768901393-pyhoba"
+  },
+  {
+    "title": "hjkl",
+    "description": "",
+    "status": "todo",
+    "priority": 1,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-25T02:58:45.039Z",
+    "id": "1758769125039-rc9yl7"
+  },
+  {
+    "title": "a",
+    "description": "",
+    "status": "todo",
+    "priority": 1,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-25T02:59:28.877Z",
+    "id": "1758769168877-b7fk75"
+  },
+  {
+    "title": "sfffffffd",
+    "description": "",
+    "status": "todo",
+    "priority": 1,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-25T02:59:39.381Z",
+    "id": "1758769179381-7q7o8h"
+  },
+  {
+    "title": "kkkkkkkkkkk",
+    "description": "",
+    "status": "todo",
+    "priority": 1,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-25T02:59:57.132Z",
+    "id": "1758769197132-i1ch68"
+  },
+  {
+    "title": "d",
+    "description": "",
+    "status": "todo",
+    "priority": 1,
+    "tags": [],
+    "dueDate": null,
+    "createdAt": "2025-09-25T03:00:54.953Z",
+    "id": "1758769254953-bwfmr0"
   }
 ]
