@@ -84,7 +84,21 @@ function App() {
         showToast={showToast}
         selectedTask={selectedTask}
       />
-      <TaskList tasks={tasks} onEdit={onEdit} />
+
+      {tasks.length > 0 ? (
+        <TaskList
+          tasks={tasks}
+          onEdit={onEdit}
+          fetchTasks={fetchTasks}
+          showToast={showToast}
+        />
+      ) : (
+        <p className="text-center text-2xl text-gray-500 mt-60 max-w-[60%] mx-auto">
+          Você ainda não tem tarefas cadastradas. Clique em "nova tarefa +" para
+          criar uma.
+        </p>
+      )}
+
       {
         <Toast
           isVisible={toast.visible}

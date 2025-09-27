@@ -1,7 +1,8 @@
 import { Clock, Trash, Pencil } from "lucide-react";
+import { deleteTask } from "../services/api.js";
 import clsx from "clsx";
 
-export default function TaskItem({ task, onEdit }) {
+export default function TaskItem({ task, onEdit, fetchTasks, showToast }) {
   const priorityMap = {
     1: "baixa",
     2: "média",
@@ -28,6 +29,16 @@ export default function TaskItem({ task, onEdit }) {
     }).format(date);
   }
 
+  async function handleDelete() {
+    try {
+      await deleteTask(task.id);
+      await fetchTasks();
+      showToast("Tarefa deletada com sucesso!", "success");
+    } catch (err) {
+      showToast("Falha ao deletar a tarefa", "error");
+    }
+  }
+
   return (
     <div className="bg-white p-10 rounded-3xl shadow mb-4 relative group">
       <div className="absolute top-6 right-10 bg-white flex gap-2 py-1.5 px-3 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
@@ -37,7 +48,10 @@ export default function TaskItem({ task, onEdit }) {
         >
           <Pencil className="w-4 h-4" />
         </button>
-        <button className="cursor-pointer p-1.5 rounded text-blue-800 hover:bg-blue-800 hover:text-white transition-colors">
+        <button
+          className="cursor-pointer p-1.5 rounded text-blue-800 hover:bg-blue-800 hover:text-white transition-colors"
+          onClick={handleDelete}
+        >
           <Trash className="w-4 h-4" />
         </button>
       </div>

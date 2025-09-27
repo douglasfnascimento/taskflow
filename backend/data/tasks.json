@@ -6,32 +6,16 @@
     "priority": 1,
     "tags": [],
     "dueDate": "2025-09-29T00:00:00.000Z",
-    "id": "1758435099296-v07xgo",
+    "id": "1",
     "createdAt": "2025-09-21T08:00:00.000Z"
-  },
-  {
-    "title": "Comprar mantimentos",
-    "description": "Frutas, vegetais, leite, pão, ovos e café. Verificar promoções no mercado antes de sair.",
-    "status": "doing",
-    "priority": 2,
-    "tags": [
-      "pessoal",
-      "compras"
-    ],
-    "dueDate": "2025-09-22T18:00:00.000Z",
-    "id": "1758435141001-7fzxe4",
-    "createdAt": "2025-09-21T09:00:00.000Z"
   },
   {
     "title": "Leitura diária",
     "status": "done",
     "priority": 3,
-    "tags": [
-      "pessoal",
-      "hábito"
-    ],
+    "tags": ["pessoal", "hábito"],
     "dueDate": "2025-09-21T22:00:00.000Z",
-    "id": "1758435184406-bkfy42",
+    "id": "2",
     "createdAt": "2025-09-21T07:30:00.000Z"
   },
   {
@@ -41,66 +25,166 @@
     "priority": 2,
     "tags": [],
     "dueDate": null,
-    "id": "1758435225000-xk12as",
+    "id": "3",
     "createdAt": "2025-09-21T10:00:00.000Z"
   },
   {
-    "title": "Exercícios físicos",
-    "description": "Treino de 45 minutos: aquecimento, circuito de força, alongamento final. Alternar exercícios de braço e perna.",
+    "title": "Responder e-mails da semana",
     "status": "doing",
-    "priority": 1,
-    "dueDate": "2025-09-22T07:00:00.000Z",
-    "id": "1758435263000-hg8kq1",
-    "createdAt": "2025-09-21T06:45:00.000Z"
+    "priority": 2,
+    "tags": ["trabalho"],
+    "dueDate": "2025-09-22T17:00:00.000Z",
+    "id": "4",
+    "createdAt": "2025-09-21T09:00:00.000Z"
   },
   {
-    "title": "Revisar notas da aula de JavaScript",
-    "description": "ok",
+    "title": "Comprar materiais de escritório",
     "status": "todo",
-    "priority": 2,
-    "tags": [],
+    "priority": 1,
+    "tags": ["compras"],
     "dueDate": null,
-    "id": "1758435300000-nz91qx",
-    "createdAt": "2025-09-21T07:00:00.000Z"
+    "id": "5",
+    "createdAt": "2025-09-20T14:00:00.000Z"
   },
   {
     "title": "Planejar viagem de fim de semana",
-    "description": "Pesquisar hotéis, roteiros, clima e transporte. Fazer checklist de itens a levar e definir orçamento!!",
+    "description": "Pesquisar hotéis, definir roteiro e orçamento.",
     "status": "todo",
     "priority": 3,
-    "tags": [],
-    "dueDate": null,
-    "id": "1758435341000-lp53ta",
+    "tags": ["pessoal", "viagem"],
+    "dueDate": "2025-10-05T00:00:00.000Z",
+    "id": "6",
+    "createdAt": "2025-09-21T12:00:00.000Z"
+  },
+  {
+    "title": "Atualizar currículo",
+    "status": "doing",
+    "priority": 2,
+    "tags": ["trabalho", "pessoal"],
+    "dueDate": "2025-09-25T12:00:00.000Z",
+    "id": "7",
+    "createdAt": "2025-09-21T11:30:00.000Z"
+  },
+  {
+    "title": "Reunião com equipe de marketing",
+    "description": "Discutir novas campanhas e revisar métricas.",
+    "status": "todo",
+    "priority": 1,
+    "tags": ["trabalho", "reunião"],
+    "dueDate": "2025-09-23T09:00:00.000Z",
+    "id": "8",
     "createdAt": "2025-09-21T08:30:00.000Z"
   },
   {
-    "title": "ABC",
-    "description": "DEF",
-    "status": "todo",
-    "priority": 1,
-    "tags": [],
+    "title": "Treinar meditação",
+    "status": "done",
+    "priority": 3,
+    "tags": ["pessoal", "saúde"],
     "dueDate": null,
-    "id": "1758914905750-59o7ou",
-    "createdAt": "2025-09-26T19:28:25.750Z"
+    "id": "9",
+    "createdAt": "2025-09-20T07:00:00.000Z"
   },
   {
-    "title": "Nova tarefa",
-    "description": "",
+    "title": "Fazer backup do computador",
     "status": "todo",
-    "priority": 1,
-    "tags": [],
-    "dueDate": null,
-    "createdAt": "2025-09-26T19:38:26.712Z",
-    "id": "1758915506712-4my3q9"
+    "priority": 2,
+    "tags": ["trabalho", "tecnologia"],
+    "dueDate": "2025-09-28T20:00:00.000Z",
+    "id": "10",
+    "createdAt": "2025-09-20T18:00:00.000Z"
   },
   {
-    "title": "hgfjhkl",
-    "description": "kkkkkkkkkkkk",
-    "status": "todo",
+    "title": "Enviar proposta para cliente",
+    "description": "Finalizar proposta de serviço e enviar por e-mail.",
+    "status": "doing",
     "priority": 1,
-    "tags": [],
-    "dueDate": "2025-09-29T00:00:00.000Z",
-    "id": "1758915956397-2nisxp",
-    "createdAt": "2025-09-26T19:45:56.397Z"
+    "tags": ["trabalho", "cliente"],
+    "dueDate": "2025-09-24T14:00:00.000Z",
+    "id": "11",
+    "createdAt": "2025-09-21T10:30:00.000Z"
+  },
+  {
+    "title": "Estudar React avançado",
+    "status": "todo",
+    "priority": 3,
+    "tags": ["estudo", "react"],
+    "dueDate": null,
+    "id": "12",
+    "createdAt": "2025-09-19T09:00:00.000Z"
+  },
+  {
+    "title": "Limpar a caixa de entrada",
+    "status": "done",
+    "priority": 2,
+    "tags": ["trabalho", "organização"],
+    "dueDate": null,
+    "id": "13",
+    "createdAt": "2025-09-19T11:00:00.000Z"
+  },
+  {
+    "title": "Revisar contrato",
+    "description": "Verificar cláusulas e datas de vencimento.",
+    "status": "doing",
+    "priority": 1,
+    "tags": ["trabalho"],
+    "dueDate": "2025-09-26T15:00:00.000Z",
+    "id": "14",
+    "createdAt": "2025-09-21T13:00:00.000Z"
+  },
+  {
+    "title": "Planejar cardápio da semana",
+    "status": "todo",
+    "priority": 2,
+    "tags": ["pessoal", "alimentação"],
+    "dueDate": null,
+    "id": "15",
+    "createdAt": "2025-09-20T10:00:00.000Z"
+  },
+  {
+    "title": "Agendar consultas médicas",
+    "status": "todo",
+    "priority": 3,
+    "tags": ["saúde"],
+    "dueDate": "2025-10-01T08:00:00.000Z",
+    "id": "16",
+    "createdAt": "2025-09-20T09:30:00.000Z"
+  },
+  {
+    "title": "Criar post para redes sociais",
+    "description": "Escrever legenda, escolher imagem e hashtags.",
+    "status": "doing",
+    "priority": 2,
+    "tags": ["trabalho", "marketing"],
+    "dueDate": "2025-09-22T12:00:00.000Z",
+    "id": "17",
+    "createdAt": "2025-09-21T09:45:00.000Z"
+  },
+  {
+    "title": "Aprender Git avançado",
+    "status": "todo",
+    "priority": 3,
+    "tags": ["estudo", "git"],
+    "dueDate": null,
+    "id": "18",
+    "createdAt": "2025-09-18T15:00:00.000Z"
+  },
+  {
+    "title": "Organizar estante",
+    "status": "done",
+    "priority": 1,
+    "tags": ["pessoal", "organização"],
+    "dueDate": null,
+    "id": "19",
+    "createdAt": "2025-09-18T09:00:00.000Z"
+  },
+  {
+    "title": "Assistir webinar sobre UX",
+    "description": "Tomar notas importantes e salvar links de referência.",
+    "status": "todo",
+    "priority": 2,
+    "tags": ["estudo", "ux"],
+    "dueDate": "2025-09-27T19:00:00.000Z",
+    "id": "20",
+    "createdAt": "2025-09-21T14:00:00.000Z"
   }
 ]

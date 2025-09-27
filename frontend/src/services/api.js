@@ -59,3 +59,26 @@ export async function editTask(taskId, updatedTask) {
         throw new Error(err.message || "Não foi possível conectar ao servidor")
     }
 }
+
+export async function deleteTask(taskId) {
+
+    try {
+
+        const response = await fetch(`http://localhost:8000/tasks/${taskId}`,
+            {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            }
+        )
+
+        const data = response.data
+
+        if (!response.ok) {
+            throw new Error(data.message || "Erro ao deletar tarefa")
+        }
+    } catch (err) {
+        throw new Error(err.message || "Não foi possível conectar ao servidor")
+    }
+
+
+}
