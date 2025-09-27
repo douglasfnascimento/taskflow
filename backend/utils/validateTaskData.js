@@ -16,6 +16,10 @@ export function validateTaskData({ title, description, status, priority, tags, d
         t = [tags.trim()]
     }
 
+    if (t.length > 5) {
+        throw new Error("You can add up to 5 tags only");
+    }
+
     let d = null
     if (dueDate) {
         const date = new Date(dueDate)
@@ -28,6 +32,7 @@ export function validateTaskData({ title, description, status, priority, tags, d
         }
         d = date.toISOString()
     }
+
 
     return {
         title: title.trim(),

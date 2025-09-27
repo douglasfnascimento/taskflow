@@ -26,11 +26,13 @@ export async function createTask(task) {
             body: JSON.stringify(task),
         });
 
+        const data = await response.json()
         if (!response.ok) {
-            throw new Error("Falha ao enviar task");
+            throw new Error(data.message || "Falha ao enviar task");
         }
 
-        return await response.json();
+        return data;
+
     } catch (err) {
         throw new Error(err.message || "Não foi possível conectar ao servidor");
     }

@@ -35,7 +35,7 @@ export default function TaskItem({ task, onEdit, fetchTasks, showToast }) {
       await fetchTasks();
       showToast("Tarefa deletada com sucesso!", "success");
     } catch (err) {
-      showToast("Falha ao deletar a tarefa", "error");
+      showToast(`Falha ao deletar a tarefa: ${err} `, "erro");
     }
   }
 

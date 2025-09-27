@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { createTask, editTask } from "../services/api.js";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X, Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function TaskForm({
   mode,
@@ -9,6 +10,16 @@ export default function TaskForm({
   showToast,
   selectedTask,
 }) {
+  const [tags, setTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [titleError, setTitleError] = useState("");
+
+  useEffect(() => {
+    if (mode === "edit" && selectedTask) {
+      setTags([...selectedTask.tags]);
+    }
+  }, [mode, selectedTask]);
+
   const formattedDate =
     mode === "edit" && selectedTask?.dueDate
       ? new Date(selectedTask.dueDate).toISOString().slice(0, 10)
@@ -25,6 +36,7 @@ export default function TaskForm({
   function prepareTaskData(formData) {
     const taskObject = {
       ...Object.fromEntries(formData),
+      tags: tags,
       priority: Number(formData.get("priority")),
     };
 
@@ -40,8 +52,17 @@ export default function TaskForm({
   }
 
   async function handleSubmit(formData) {
+    const title = formData.get("title");
+    if (!title.trim()) {
+      setTitleError("O título é obrigatório");
+      return;
+    } else {
+      setTitleError("");
+    }
+
     try {
       const taskObject = prepareTaskData(formData);
+
       if (mode === "create") {
         await createTask(taskObject);
       } else if (mode === "edit") {
@@ -55,6 +76,13 @@ export default function TaskForm({
     }
   }
 
+  function handleTags(tag) {
+    if (!tag.trim()) return;
+
+    setTags((prevTags) => [...prevTags, tag]);
+    setInputValue("");
+  }
+
   return (
     <section>
       <form action={handleSubmit} className="flex flex-col gap-6 text-gray-700">
@@ -63,14 +91,19 @@ export default function TaskForm({
             Título <span className="text-red-700">*</span>
           </label>
           <input
-            required
             id="title"
             type="text"
             name="title"
             placeholder="Adicione um título"
             className="border border-gray-300 rounded-xl px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             defaultValue={mode === "edit" ? selectedTask?.title : ""}
+            onChange={() => {
+              setTitleError("");
+            }}
           />
+          {titleError !== "" && (
+            <p className="text-sm text-red-500">{titleError}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-2">
@@ -144,7 +177,7 @@ export default function TaskForm({
               <option value="doing">Fazendo</option>
               <option value="done">Concluída</option>
             </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5">
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
               <ChevronDown className="h-4 w-4 text-gray-400" />
             </div>
           </div>
@@ -154,14 +187,71 @@ export default function TaskForm({
           <label htmlFor="dueDate" className="font-semibold text-blue-800">
             Prazo
           </label>
+          <div className="relative">
+            <input
+              type="date"
+              name="dueDate"
+              id="dueDate"
+              defaultValue={formattedDate}
+              min={new Date().toISOString().slice(0, 10)}
+              className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none w-full pr-10"
+            />
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
+              <Calendar className="h-5 w-5 text-gray-400" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="tags" className="font-semibold text-blue-800">
+            Tags
+          </label>
+
           <input
-            type="date"
-            name="dueDate"
-            id="dueDate"
-            defaultValue={formattedDate}
-            className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            min={new Date().toISOString().slice(0, 10)}
+            id="tags"
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "," || e.key === " " || e.key === "Enter") {
+                e.preventDefault();
+                handleTags(inputValue);
+              }
+            }}
+            placeholder="Até cinco tags (separare por vírgula, enter/return ou espaço)"
+            className={clsx(
+              "border border-gray-300 rounded-xl px-4 py-2 focus:outline-none appearance-none w-full pr-10",
+              tags.length >= 5 && "bg-gray-100 text-gray-500"
+            )}
+            disabled={tags.length >= 5}
           />
+          {tags.length >= 5 && (
+            <p className="text-sm text-red-500 mt-1">
+              Máximo de 5 tags atingido
+            </p>
+          )}
+
+          <div className="flex flex-wrap gap-2 mt-2">
+            {tags.map((tag, index) => (
+              <span
+                key={index}
+                className="bg-blue-100 text-blue-700 px-3 py-1 rounded-xl text-sm font-medium flex items-center"
+              >
+                {tag}
+                <button
+                  type="button"
+                  onClick={() =>
+                    setTags((prevTags) =>
+                      prevTags.filter((_, i) => i !== index)
+                    )
+                  }
+                  className="ml-2 w-3 h-3 flex items-center justify-center rounded-full bg-blue-300 text-blue-700 hover:bg-blue-700 hover:text-white transition-colors text-xs font-bold"
+                >
+                  <X className="p-0.5" />
+                </button>
+              </span>
+            ))}
+          </div>
         </div>
 
         <button

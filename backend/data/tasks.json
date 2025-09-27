@@ -11,10 +11,13 @@
   },
   {
     "title": "Leitura diária",
+    "description": "",
     "status": "done",
     "priority": 3,
-    "tags": ["pessoal", "hábito"],
-    "dueDate": "2025-09-21T22:00:00.000Z",
+    "tags": [
+      "pessoal"
+    ],
+    "dueDate": "2025-09-30T00:00:00.000Z",
     "id": "2",
     "createdAt": "2025-09-21T07:30:00.000Z"
   },
@@ -32,7 +35,9 @@
     "title": "Responder e-mails da semana",
     "status": "doing",
     "priority": 2,
-    "tags": ["trabalho"],
+    "tags": [
+      "trabalho"
+    ],
     "dueDate": "2025-09-22T17:00:00.000Z",
     "id": "4",
     "createdAt": "2025-09-21T09:00:00.000Z"
@@ -41,7 +46,9 @@
     "title": "Comprar materiais de escritório",
     "status": "todo",
     "priority": 1,
-    "tags": ["compras"],
+    "tags": [
+      "compras"
+    ],
     "dueDate": null,
     "id": "5",
     "createdAt": "2025-09-20T14:00:00.000Z"
@@ -51,7 +58,10 @@
     "description": "Pesquisar hotéis, definir roteiro e orçamento.",
     "status": "todo",
     "priority": 3,
-    "tags": ["pessoal", "viagem"],
+    "tags": [
+      "pessoal",
+      "viagem"
+    ],
     "dueDate": "2025-10-05T00:00:00.000Z",
     "id": "6",
     "createdAt": "2025-09-21T12:00:00.000Z"
@@ -60,7 +70,10 @@
     "title": "Atualizar currículo",
     "status": "doing",
     "priority": 2,
-    "tags": ["trabalho", "pessoal"],
+    "tags": [
+      "trabalho",
+      "pessoal"
+    ],
     "dueDate": "2025-09-25T12:00:00.000Z",
     "id": "7",
     "createdAt": "2025-09-21T11:30:00.000Z"
@@ -70,7 +83,10 @@
     "description": "Discutir novas campanhas e revisar métricas.",
     "status": "todo",
     "priority": 1,
-    "tags": ["trabalho", "reunião"],
+    "tags": [
+      "trabalho",
+      "reunião"
+    ],
     "dueDate": "2025-09-23T09:00:00.000Z",
     "id": "8",
     "createdAt": "2025-09-21T08:30:00.000Z"
@@ -79,7 +95,10 @@
     "title": "Treinar meditação",
     "status": "done",
     "priority": 3,
-    "tags": ["pessoal", "saúde"],
+    "tags": [
+      "pessoal",
+      "saúde"
+    ],
     "dueDate": null,
     "id": "9",
     "createdAt": "2025-09-20T07:00:00.000Z"
@@ -88,7 +107,10 @@
     "title": "Fazer backup do computador",
     "status": "todo",
     "priority": 2,
-    "tags": ["trabalho", "tecnologia"],
+    "tags": [
+      "trabalho",
+      "tecnologia"
+    ],
     "dueDate": "2025-09-28T20:00:00.000Z",
     "id": "10",
     "createdAt": "2025-09-20T18:00:00.000Z"
@@ -98,7 +120,10 @@
     "description": "Finalizar proposta de serviço e enviar por e-mail.",
     "status": "doing",
     "priority": 1,
-    "tags": ["trabalho", "cliente"],
+    "tags": [
+      "trabalho",
+      "cliente"
+    ],
     "dueDate": "2025-09-24T14:00:00.000Z",
     "id": "11",
     "createdAt": "2025-09-21T10:30:00.000Z"
@@ -107,7 +132,10 @@
     "title": "Estudar React avançado",
     "status": "todo",
     "priority": 3,
-    "tags": ["estudo", "react"],
+    "tags": [
+      "estudo",
+      "react"
+    ],
     "dueDate": null,
     "id": "12",
     "createdAt": "2025-09-19T09:00:00.000Z"
@@ -116,7 +144,10 @@
     "title": "Limpar a caixa de entrada",
     "status": "done",
     "priority": 2,
-    "tags": ["trabalho", "organização"],
+    "tags": [
+      "trabalho",
+      "organização"
+    ],
     "dueDate": null,
     "id": "13",
     "createdAt": "2025-09-19T11:00:00.000Z"
@@ -126,7 +157,9 @@
     "description": "Verificar cláusulas e datas de vencimento.",
     "status": "doing",
     "priority": 1,
-    "tags": ["trabalho"],
+    "tags": [
+      "trabalho"
+    ],
     "dueDate": "2025-09-26T15:00:00.000Z",
     "id": "14",
     "createdAt": "2025-09-21T13:00:00.000Z"
@@ -135,7 +168,10 @@
     "title": "Planejar cardápio da semana",
     "status": "todo",
     "priority": 2,
-    "tags": ["pessoal", "alimentação"],
+    "tags": [
+      "pessoal",
+      "alimentação"
+    ],
     "dueDate": null,
     "id": "15",
     "createdAt": "2025-09-20T10:00:00.000Z"
@@ -144,7 +180,9 @@
     "title": "Agendar consultas médicas",
     "status": "todo",
     "priority": 3,
-    "tags": ["saúde"],
+    "tags": [
+      "saúde"
+    ],
     "dueDate": "2025-10-01T08:00:00.000Z",
     "id": "16",
     "createdAt": "2025-09-20T09:30:00.000Z"
@@ -154,7 +192,10 @@
     "description": "Escrever legenda, escolher imagem e hashtags.",
     "status": "doing",
     "priority": 2,
-    "tags": ["trabalho", "marketing"],
+    "tags": [
+      "trabalho",
+      "marketing"
+    ],
     "dueDate": "2025-09-22T12:00:00.000Z",
     "id": "17",
     "createdAt": "2025-09-21T09:45:00.000Z"
@@ -163,7 +204,10 @@
     "title": "Aprender Git avançado",
     "status": "todo",
     "priority": 3,
-    "tags": ["estudo", "git"],
+    "tags": [
+      "estudo",
+      "git"
+    ],
     "dueDate": null,
     "id": "18",
     "createdAt": "2025-09-18T15:00:00.000Z"
@@ -172,7 +216,10 @@
     "title": "Organizar estante",
     "status": "done",
     "priority": 1,
-    "tags": ["pessoal", "organização"],
+    "tags": [
+      "pessoal",
+      "organização"
+    ],
     "dueDate": null,
     "id": "19",
     "createdAt": "2025-09-18T09:00:00.000Z"
@@ -182,9 +229,39 @@
     "description": "Tomar notas importantes e salvar links de referência.",
     "status": "todo",
     "priority": 2,
-    "tags": ["estudo", "ux"],
+    "tags": [
+      "estudo",
+      "ux"
+    ],
     "dueDate": "2025-09-27T19:00:00.000Z",
     "id": "20",
     "createdAt": "2025-09-21T14:00:00.000Z"
+  },
+  {
+    "title": "Tarefa de testes",
+    "description": "Essa tarefa tem como objetivo testar a aplicação das tags!",
+    "status": "todo",
+    "priority": 2,
+    "tags": [
+      "amor",
+      "paixao",
+      "violet",
+      "rosa"
+    ],
+    "dueDate": "2025-09-29T00:00:00.000Z",
+    "createdAt": "2025-09-27T14:49:43.765Z",
+    "id": "1758984583765-mh4faz"
+  },
+  {
+    "title": "aklljdksdskds",
+    "description": "OKKKKKKKKKKKKKKK",
+    "status": "todo",
+    "priority": 1,
+    "tags": [
+      "blz"
+    ],
+    "dueDate": null,
+    "createdAt": "2025-09-27T16:26:33.051Z",
+    "id": "1758990393051-cqamck"
   }
 ]
