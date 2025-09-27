@@ -7,6 +7,7 @@ export default function TaskFormModal({
   mode,
   fetchTasks,
   showToast,
+  selectedTask,
 }) {
   if (!isOpen) return null;
 
@@ -22,7 +23,7 @@ export default function TaskFormModal({
   return (
     <div
       onClick={closeModal}
-      className="fixed inset-0 backdrop-blur-md bg-black/40 flex items-center justify-center"
+      className="fixed inset-0 backdrop-blur-md bg-black/40 flex items-center justify-center z-50"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -42,6 +43,7 @@ export default function TaskFormModal({
           fetchTasks={fetchTasks}
           closeModal={closeModal}
           showToast={showToast}
+          selectedTask={selectedTask}
         />
       </div>
     </div>

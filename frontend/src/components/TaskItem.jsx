@@ -1,7 +1,7 @@
-import { Clock } from "lucide-react";
+import { Clock, Trash, Pencil } from "lucide-react";
 import clsx from "clsx";
 
-export default function TaskItem({ task }) {
+export default function TaskItem({ task, onEdit }) {
   const priorityMap = {
     1: "baixa",
     2: "média",
@@ -29,7 +29,18 @@ export default function TaskItem({ task }) {
   }
 
   return (
-    <div className="bg-white p-10 rounded-3xl shadow mb-4">
+    <div className="bg-white p-10 rounded-3xl shadow mb-4 relative group">
+      <div className="absolute top-6 right-10 bg-white flex gap-2 py-1.5 px-3 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+        <button
+          onClick={() => onEdit(task)}
+          className="cursor-pointer p-1.5 rounded text-blue-800 hover:bg-blue-800 hover:text-white transition-colors"
+        >
+          <Pencil className="w-4 h-4" />
+        </button>
+        <button className="cursor-pointer p-1.5 rounded text-blue-800 hover:bg-blue-800 hover:text-white transition-colors">
+          <Trash className="w-4 h-4" />
+        </button>
+      </div>
       <h2 className="text-blue-800 text-4xl mb-4 font-bold">{task.title}</h2>
       {task.dueDate && (
         <div className="flex items-center space-x-2">

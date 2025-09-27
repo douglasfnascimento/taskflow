@@ -13,6 +13,7 @@ function App() {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [mode, setMode] = useState("create");
+  const [selectedTask, setSelectedTask] = useState(null);
   const [toast, setToast] = useState({
     visible: false,
     message: "",
@@ -57,20 +58,33 @@ function App() {
     setTimeout(() => setToast({ visible: false }), 5000);
   }
 
+  function onEdit(clickedTask) {
+    setSelectedTask(clickedTask);
+    setMode("edit");
+    openModal();
+  }
+
+  function onAddTask() {
+    setSelectedTask(null);
+    setMode("create");
+    openModal();
+  }
+
   return (
     <div className="bg-blue-50 min-h-screen p-3">
       <Header />
       {loading && <p>Carregando...</p>}
       {error && <p> Erro: {error}</p>}
-      <TaskControls onAddTask={openModal} />
+      <TaskControls onAddTask={onAddTask} />
       <TaskFormModal
         isOpen={showModal}
         closeModal={closeModal}
         mode={mode}
         fetchTasks={fetchTasks}
         showToast={showToast}
+        selectedTask={selectedTask}
       />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onEdit={onEdit} />
       {
         <Toast
           isVisible={toast.visible}

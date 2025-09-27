@@ -1,8 +1,27 @@
 import clsx from "clsx";
-import { createTask } from "../services/api.js";
+import { createTask, editTask } from "../services/api.js";
 import { ChevronDown } from "lucide-react";
 
-export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
+export default function TaskForm({
+  mode,
+  fetchTasks,
+  closeModal,
+  showToast,
+  selectedTask,
+}) {
+  const formattedDate =
+    mode === "edit" && selectedTask?.dueDate
+      ? new Date(selectedTask.dueDate).toISOString().slice(0, 10)
+      : "";
+
+  const toastMessage = () => {
+    if (mode === "create") {
+      return "Tarefa criada com sucesso!";
+    } else if (mode === "edit") {
+      return "Tarefa editada com sucesso!";
+    }
+  };
+
   function prepareTaskData(formData) {
     const taskObject = {
       ...Object.fromEntries(formData),
@@ -23,12 +42,15 @@ export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
   async function handleSubmit(formData) {
     try {
       const taskObject = prepareTaskData(formData);
-      await createTask(taskObject);
+      if (mode === "create") {
+        await createTask(taskObject);
+      } else if (mode === "edit") {
+        await editTask(selectedTask.id, taskObject);
+      }
       fetchTasks();
       closeModal();
-      showToast("Tarefa criada com sucesso!", "success");
+      showToast(toastMessage(), "success");
     } catch (err) {
-      console.error("Erro:", err.message);
       showToast(err.message, "error");
     }
   }
@@ -47,6 +69,7 @@ export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
             name="title"
             placeholder="Adicione um título"
             className="border border-gray-300 rounded-xl px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue={mode === "edit" ? selectedTask?.title : ""}
           />
         </div>
 
@@ -59,6 +82,7 @@ export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
             name="description"
             placeholder="Escreva uma descrição (opcional)"
             rows={4}
+            defaultValue={mode === "edit" ? selectedTask?.description : ""}
             className="resize-none border border-gray-300 rounded-xl px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -71,7 +95,9 @@ export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
                 type="radio"
                 name="priority"
                 value={1}
-                defaultChecked
+                defaultChecked={
+                  mode === "create" || selectedTask?.priority === 1
+                }
                 className="accent-green-600"
               />
               Baixa
@@ -82,6 +108,7 @@ export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
                 name="priority"
                 value={2}
                 className="accent-orange-400"
+                defaultChecked={selectedTask?.priority === 2}
               />
               Média
             </label>
@@ -91,6 +118,7 @@ export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
                 name="priority"
                 value={3}
                 className="accent-red-600"
+                defaultChecked={selectedTask?.priority === 3}
               />
               Alta
             </label>
@@ -105,7 +133,7 @@ export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
             <select
               name="status"
               id="status"
-              defaultValue="todo"
+              defaultValue={mode === "create" ? "todo" : selectedTask?.status}
               disabled={mode === "create"}
               className={clsx(
                 "border border-gray-300 rounded-xl px-4 py-2 focus:outline-none appearance-none w-full pr-10",
@@ -130,7 +158,9 @@ export default function TaskForm({ mode, fetchTasks, closeModal, showToast }) {
             type="date"
             name="dueDate"
             id="dueDate"
+            defaultValue={formattedDate}
             className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            min={new Date().toISOString().slice(0, 10)}
           />
         </div>
 
