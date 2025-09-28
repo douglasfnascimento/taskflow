@@ -14,6 +14,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [mode, setMode] = useState("create");
   const [selectedTask, setSelectedTask] = useState(null);
+  const [filteredTasks, setFilteredTasks] = useState([]);
   const [toast, setToast] = useState({
     visible: false,
     message: "",
@@ -76,12 +77,39 @@ function App() {
     openModal();
   }
 
+  useEffect(() => {
+    setFilteredTasks(tasks);
+  }, [tasks]);
+
+  function onSearchChange(searchInput) {
+    if (!searchInput) {
+      setFilteredTasks(tasks);
+      return;
+    }
+
+    const filtered = tasks.filter((task) => {
+      const matchesTitle = task.title
+        .toLowerCase()
+        .includes(searchInput.toLowerCase());
+      const matchesDescription = task.description
+        ?.toLowerCase()
+        .includes(searchInput.toLowerCase());
+      const matchesTag = task.tags?.some((tag) =>
+        tag.toLowerCase().includes(searchInput.toLowerCase())
+      );
+
+      return matchesTitle || matchesDescription || matchesTag;
+    });
+
+    setFilteredTasks(filtered);
+  }
+
   return (
     <div className="bg-blue-50 min-h-screen p-3">
       <Header />
       {loading && <p>Carregando...</p>}
       {error && <p> Erro: {error}</p>}
-      <TaskControls onAddTask={onAddTask} />
+      <TaskControls onAddTask={onAddTask} onSearchChange={onSearchChange} />
       <TaskModal
         isOpen={showModal}
         closeModal={closeModal}
@@ -94,7 +122,7 @@ function App() {
 
       {tasks.length > 0 ? (
         <TaskList
-          tasks={tasks}
+          tasks={filteredTasks}
           onEdit={onEdit}
           onView={onView}
           fetchTasks={fetchTasks}
