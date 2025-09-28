@@ -1,6 +1,12 @@
 import TaskItem from "./TaskItem";
 
-export default function TaskList({ tasks, onEdit, fetchTasks, showToast }) {
+export default function TaskList({
+  tasks,
+  onEdit,
+  fetchTasks,
+  showToast,
+  onView,
+}) {
   return tasks.map((task) => (
     <div className="mx-auto max-w-[60%]" key={task.id}>
       <TaskItem
@@ -8,6 +14,7 @@ export default function TaskList({ tasks, onEdit, fetchTasks, showToast }) {
         onEdit={onEdit}
         fetchTasks={fetchTasks}
         showToast={showToast}
+        onView={onView}
       />
     </div>
   ));

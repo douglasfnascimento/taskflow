@@ -1,4 +1,5 @@
 import { Plus, Search } from "lucide-react";
+import Button from "./Button";
 
 export default function TaskControls({ onAddTask }) {
   return (
@@ -11,13 +12,7 @@ export default function TaskControls({ onAddTask }) {
         />
         <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
       </div>
-      <button
-        onClick={onAddTask}
-        className="bg-blue-800 text-xl text-white py-2 px-10 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-blue-500 ransition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold"
-      >
-        <span>nova tarefa</span>
-        <Plus className="w-5 h-5" />
-      </button>
+      <Button text="nova tarefa" onClick={onAddTask} Icon={Plus} color="blue" />
     </div>
   );
 }

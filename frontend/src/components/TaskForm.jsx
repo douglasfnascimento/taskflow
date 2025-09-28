@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { createTask, editTask } from "../services/api.js";
-import { ChevronDown, X, Calendar } from "lucide-react";
+import { ChevronDown, X, Calendar, Check, Plus } from "lucide-react";
 import { useState, useEffect } from "react";
+import Button from "./Button.jsx";
 
 export default function TaskForm({
   mode,
@@ -253,13 +254,16 @@ export default function TaskForm({
             ))}
           </div>
         </div>
-
-        <button
-          type="submit"
-          className="bg-blue-800 text-white font-semibold py-2 px-6 rounded-xl hover:bg-blue-500 cursor-pointer transition-colors self-end"
-        >
-          Salvar
-        </button>
+        <div className="flex justify-end">
+          <div className="w-max">
+            <Button
+              type="submit"
+              text={mode === "create" ? "Adicionar" : "Salvar"}
+              Icon={mode === "create" ? Plus : Check}
+              color="blue"
+            />
+          </div>
+        </div>
       </form>
     </section>
   );

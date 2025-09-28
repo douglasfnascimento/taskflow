@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import TaskList from "./components/TaskList";
 import { getTasks } from "./services/api.js";
 import TaskControls from "./components/TaskControls.jsx";
-import TaskFormModal from "./components/TaskFormModal.jsx";
+import TaskModal from "./components/TaskModal.jsx";
 import Toast from "./components/Toast.jsx";
 
 function App() {
@@ -70,25 +70,33 @@ function App() {
     openModal();
   }
 
+  function onView(clickedTask) {
+    setSelectedTask(clickedTask);
+    setMode("view");
+    openModal();
+  }
+
   return (
     <div className="bg-blue-50 min-h-screen p-3">
       <Header />
       {loading && <p>Carregando...</p>}
       {error && <p> Erro: {error}</p>}
       <TaskControls onAddTask={onAddTask} />
-      <TaskFormModal
+      <TaskModal
         isOpen={showModal}
         closeModal={closeModal}
         mode={mode}
         fetchTasks={fetchTasks}
         showToast={showToast}
         selectedTask={selectedTask}
+        onEdit={onEdit}
       />
 
       {tasks.length > 0 ? (
         <TaskList
           tasks={tasks}
           onEdit={onEdit}
+          onView={onView}
           fetchTasks={fetchTasks}
           showToast={showToast}
         />
