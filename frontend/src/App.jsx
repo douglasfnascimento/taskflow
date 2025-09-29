@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { useEffect } from "react";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
@@ -15,6 +15,9 @@ function App() {
   const [mode, setMode] = useState("create");
   const [selectedTask, setSelectedTask] = useState(null);
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [sortOrder, setSortOrder] = useState(() => {
+    return localStorage.getItem("taskSortOrder") || "recent";
+  });
   const [toast, setToast] = useState({
     visible: false,
     message: "",
@@ -104,12 +107,32 @@ function App() {
     setFilteredTasks(filtered);
   }
 
+  const sortedTasks = [...filteredTasks].sort((taskA, taskB) => {
+    const dateA = new Date(taskA.createdAt).getTime();
+    const dateB = new Date(taskB.createdAt).getTime();
+
+    return sortOrder === "recent" ? dateB - dateA : dateA - dateB;
+  });
+
+  function onToggleOrder() {
+    setSortOrder((prev) => (prev === "recent" ? "oldest" : "recent"));
+  }
+
+  useEffect(() => {
+    localStorage.setItem("taskSortOrder", sortOrder);
+  }, [sortOrder]);
+
   return (
     <div className="bg-blue-50 min-h-screen p-3">
       <Header />
       {loading && <p>Carregando...</p>}
       {error && <p> Erro: {error}</p>}
-      <TaskControls onAddTask={onAddTask} onSearchChange={onSearchChange} />
+      <TaskControls
+        onAddTask={onAddTask}
+        onSearchChange={onSearchChange}
+        onToggleOrder={onToggleOrder}
+        sortOrder={sortOrder}
+      />
       <TaskModal
         isOpen={showModal}
         closeModal={closeModal}
@@ -122,7 +145,7 @@ function App() {
 
       {tasks.length > 0 ? (
         <TaskList
-          tasks={filteredTasks}
+          tasks={sortedTasks}
           onEdit={onEdit}
           onView={onView}
           fetchTasks={fetchTasks}

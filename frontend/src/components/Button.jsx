@@ -11,17 +11,22 @@ export default function Button({
     blue: {
       bg: "bg-blue-800",
       hover: "hover:bg-blue-500",
-      ring: "focus:ring-blue-500",
+      textColor: "text-white",
     },
     red: {
       bg: "bg-red-800",
       hover: "hover:bg-red-500",
-      ring: "focus:ring-red-500",
+      textColor: "text-white",
     },
     green: {
       bg: "bg-green-800",
       hover: "hover:bg-green-500",
-      ring: "focus:ring-green-500",
+      textColor: "text-white",
+    },
+    white: {
+      bg: "bg-white",
+      hover: "hover:bg-gray-300",
+      textColor: "text-blue-800",
     },
   };
 
@@ -34,8 +39,8 @@ export default function Button({
       className={clsx(
         currentColor.bg,
         currentColor.hover,
-        currentColor.ring,
-        "w-auto text-white py-1 px-3 rounded-xl flex items-center gap-2 cursor-pointer",
+        currentColor.textColor,
+        "w-auto py-1 px-3 rounded-xl flex items-center gap-2 cursor-pointer",
         "transition-colors duration-200 focus:outline-none font-semibold"
       )}
     >
