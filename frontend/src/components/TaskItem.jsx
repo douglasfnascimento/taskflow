@@ -1,5 +1,6 @@
 import { Clock, Trash, Pencil, Eye, Calendar } from "lucide-react";
 import { handleDelete } from "../utils/taskHandlers";
+import { priorityMap, statusMap } from "../utils/constants.js";
 
 export default function TaskItem({
   task,
@@ -19,18 +20,6 @@ export default function TaskItem({
       </button>
     );
   }
-
-  const priorityMap = {
-    1: { label: "baixa", bg: "bg-green-100", text: "text-green-800" },
-    2: { label: "média", bg: "bg-orange-100", text: "text-orange-800" },
-    3: { label: "alta", bg: "bg-red-100", text: "text-red-800" },
-  };
-
-  const statusMap = {
-    todo: { label: "a fazer" },
-    doing: { label: "fazendo" },
-    done: { label: "concluída" },
-  };
 
   return (
     <div className="bg-white p-10 rounded-3xl shadow mb-4 relative group">

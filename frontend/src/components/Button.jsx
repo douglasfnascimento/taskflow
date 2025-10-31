@@ -40,7 +40,7 @@ export default function Button({
         currentColor.bg,
         currentColor.hover,
         currentColor.textColor,
-        "w-auto py-1 px-3 rounded-xl flex items-center gap-2 cursor-pointer",
+        "min-w-max py-1 px-3 rounded-xl flex items-center gap-2 cursor-pointer",
         "transition-colors duration-200 focus:outline-none font-semibold"
       )}
     >

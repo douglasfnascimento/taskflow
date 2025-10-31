@@ -35,7 +35,7 @@ export default function TaskModal({
           <h1 className="text-4xl font-bold text-blue-800">{modalTitle}</h1>
           <button
             onClick={closeModal}
-            className="w-7 h-7 text-gray-500 hover:text-white hover:bg-blue-800 hover:rounded-2xl flex items-center justify-center cursor-pointer"
+            className="w-7 h-7 text-gray-500 hover:text-white rounded-full hover:bg-blue-800  flex items-center justify-center cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>

@@ -1,11 +1,11 @@
-import { use, useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
 import { getTasks } from "./services/api.js";
 import TaskControls from "./components/TaskControls.jsx";
 import TaskModal from "./components/TaskModal.jsx";
 import Toast from "./components/Toast.jsx";
+import { priorityMap, statusMap } from "./utils/constants.js";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -15,6 +15,10 @@ function App() {
   const [mode, setMode] = useState("create");
   const [selectedTask, setSelectedTask] = useState(null);
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState({
+    priority: [],
+    status: [],
+  });
   const [sortOrder, setSortOrder] = useState(() => {
     return localStorage.getItem("taskSortOrder") || "recent";
   });
@@ -122,6 +126,33 @@ function App() {
     localStorage.setItem("taskSortOrder", sortOrder);
   }, [sortOrder]);
 
+  function onFilterChange(selectedFilters) {
+    setSelectedFilters(selectedFilters);
+  }
+
+  useEffect(() => {
+    let filtered = tasks;
+    if (selectedFilters.priority.length > 0) {
+      filtered = filtered.filter((task) =>
+        selectedFilters.priority.includes(
+          priorityMap[task.priority].label.toLowerCase()
+        )
+      );
+    }
+
+    if (selectedFilters.status.length > 0) {
+      filtered = filtered.filter((task) =>
+        selectedFilters.status.includes(
+          statusMap[task.status].label.toLowerCase()
+        )
+      );
+    }
+
+    setFilteredTasks(filtered);
+  }, [selectedFilters, tasks]);
+
+  console.log(tasks);
+
   return (
     <div className="bg-blue-50 min-h-screen p-3">
       <Header />
@@ -132,6 +163,7 @@ function App() {
         onSearchChange={onSearchChange}
         onToggleOrder={onToggleOrder}
         sortOrder={sortOrder}
+        onFilterChange={onFilterChange}
       />
       <TaskModal
         isOpen={showModal}

@@ -2,6 +2,7 @@ import { Calendar, Pencil, Trash, Loader2 } from "lucide-react";
 import Button from "./Button";
 import { handleDelete } from "../utils/taskHandlers";
 import { useState } from "react";
+import { priorityMap, statusMap } from "../utils/constants.js";
 
 export function TaskView({
   selectedTask,
@@ -66,18 +67,6 @@ export function TaskView({
       }).format(dueDate);
     }
   }
-
-  const priorityMap = {
-    1: { label: "baixa", bg: "bg-green-100", text: "text-green-800" },
-    2: { label: "média", bg: "bg-orange-100", text: "text-orange-800" },
-    3: { label: "alta", bg: "bg-red-100", text: "text-red-800" },
-  };
-
-  const statusMap = {
-    todo: { label: "a fazer" },
-    doing: { label: "fazendo" },
-    done: { label: "concluída" },
-  };
 
   return (
     <div className="flex flex-col gap-4">
