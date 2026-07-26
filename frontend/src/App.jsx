@@ -173,8 +173,6 @@ function App() {
   return (
     <div className="bg-gradient-to-tr from-slate-100 to-blue-50 min-h-screen px-4 py-8 md:px-8">
       <Header />
-      {loading && <p>Carregando...</p>}
-      {error && <p> Erro: {error}</p>}
       <TaskControls
         onAddTask={onAddTask}
         onSearchChange={onSearchChange}
@@ -193,8 +191,17 @@ function App() {
         selectedTask={selectedTask}
         onEdit={onEdit}
       />
-
-      {tasks.length > 0 ? (
+      {loading ? (
+        <div className="text-center max-w-4xl mx-auto mt-20 flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+          <p className="text-gray-500 font-medium text-sm">Carregando tarefas...</p>
+        </div>
+      ) : error ? (
+        <div className="text-center max-w-4xl mx-auto mt-20 bg-red-50 border border-red-200 p-6 rounded-2xl">
+          <p className="text-red-700 font-semibold mb-1">Erro ao carregar tarefas</p>
+          <p className="text-red-500 text-sm">{error}</p>
+        </div>
+      ) : tasks.length > 0 ? (
         <TaskList
           tasks={sortedTasks}
           onEdit={onEdit}
@@ -214,13 +221,13 @@ function App() {
         </div>
       )}
 
-      {
+      {toast.visible && (
         <Toast
           isVisible={toast.visible}
           message={toast.message}
           type={toast.type}
         />
-      }
+      )}
     </div>
   );
 }

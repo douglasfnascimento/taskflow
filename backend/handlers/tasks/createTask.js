@@ -1,25 +1,37 @@
 import { parseJSONBody } from "../../utils/parseJSONBody.js";
-import { validateTaskData } from "../../utils/validateTaskData.js"
+import { validateTaskData } from "../../utils/validateTaskData.js";
 import { sanitizeInput } from "../../utils/sanitizeInput.js";
 import { generateId } from "../../utils/generateId.js";
-import { getData } from "../../utils/getData.js";
-import { saveData } from "../../utils/saveData.js";
 import { sendResponse } from "../../utils/sendResponse.js";
-
+import pool from "../../src/db.js";
 
 export async function createTask(req, res) {
     try {
-        const parsedBody = await parseJSONBody(req)
-        const data = sanitizeInput(validateTaskData(parsedBody))
-        const createdAt = new Date().toISOString()
-        const newTask = { ...data, createdAt, id: generateId() }
+        const parsedBody = await parseJSONBody(req);
+        const data = sanitizeInput(validateTaskData(parsedBody));
 
-        const tasks = await getData()
-        tasks.push(newTask)
-        await saveData(tasks)
+        const query = `
+            INSERT INTO tasks (id, title, description, priority, status, tags, "dueDate")
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING *
+        `;
 
-        sendResponse(res, { statusCode: 201, data: newTask })
+        const values = [
+            generateId(),
+            data.title,
+            data.description || null,
+            data.priority,
+            data.status || 'todo',
+            data.tags || [],
+            data.dueDate || null
+        ];
+
+        const { rows } = await pool.query(query, values);
+        const newTask = rows[0];
+
+        sendResponse(res, { statusCode: 201, data: newTask });
     } catch (err) {
-        sendResponse(res, { statusCode: 400, data: { message: err.message } })
+        sendResponse(res, { statusCode: 400, data: { message: err.message } });
+        console.error(err);
     }
 }

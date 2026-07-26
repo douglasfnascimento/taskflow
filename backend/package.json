@@ -4,10 +4,12 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "start": "node --env-file=.env src/server.js",
+    "dev": "node --watch --env-file=.env src/server.js",
+    "migrate": "node --env-file=.env src/migrate.js"
   },
   "dependencies": {
+    "pg": "^8.22.0",
     "sanitize-html": "^2.17.0"
   }
 }

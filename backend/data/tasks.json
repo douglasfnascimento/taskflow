@@ -53,13 +53,13 @@
   {
     "title": "Enviar proposta para cliente",
     "description": "Finalizar proposta de serviço e enviar por e-mail.",
-    "status": "doing",
+    "status": "done",
     "priority": 1,
     "tags": [
       "trabalho",
       "cliente"
     ],
-    "dueDate": "2025-09-24T14:00:00.000Z",
+    "dueDate": "2026-09-28T00:00:00.000Z",
     "id": "11",
     "createdAt": "2025-09-21T10:30:00.000Z"
   },
@@ -89,7 +89,8 @@
   },
   {
     "title": "Aprender Git avançado",
-    "status": "todo",
+    "description": "",
+    "status": "done",
     "priority": 3,
     "tags": [
       "estudo",
@@ -102,13 +103,13 @@
   {
     "title": "Assistir webinar sobre UX",
     "description": "Tomar notas importantes e salvar links de referência.",
-    "status": "todo",
+    "status": "doing",
     "priority": 2,
     "tags": [
       "estudo",
       "ux"
     ],
-    "dueDate": "2025-09-27T19:00:00.000Z",
+    "dueDate": "2026-09-27T00:00:00.000Z",
     "id": "20",
     "createdAt": "2025-09-21T14:00:00.000Z"
   },

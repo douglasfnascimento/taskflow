@@ -1,36 +1,26 @@
-import { getData } from "../../utils/getData.js";
+import pool from "../../src/db.js";
 import { sendResponse } from "../../utils/sendResponse.js";
-import { saveData } from "../../utils/saveData.js";
 
 export async function deleteTask(req, res, id) {
-
     if (!id) {
-        return sendResponse(res, { statusCode: 400, data: { "message": "Task id is required" } })
+        return sendResponse(res, { statusCode: 400, data: { "message": "Task id is required" } });
     }
-
-
-    let tasks
 
     try {
-        tasks = await getData()
+        const query = `
+            DELETE FROM tasks
+            WHERE id = $1
+            RETURNING *
+        `;
+        const { rows } = await pool.query(query, [id]);
+
+        if (rows.length === 0) {
+            return sendResponse(res, { statusCode: 404, data: { "message": "Task doesn't exist" } });
+        }
+
+        return sendResponse(res, { data: rows[0] });
     } catch (err) {
-        return sendResponse(res, { statusCode: 500, data: { message: "Internal server error" } })
+        console.error(err);
+        return sendResponse(res, { statusCode: 500, data: { message: "Erro ao excluir tarefa no banco." } });
     }
-
-
-    const task = tasks.find(task => task.id === id)
-
-    if (!task) {
-        return sendResponse(res, { statusCode: 404, data: { "message": "Task doesn't exist" } })
-    }
-
-    const newTasks = tasks.filter(task => task.id !== id)
-
-    try {
-        await saveData(newTasks)
-    } catch (err) {
-        return sendResponse(res, { statusCode: 500, data: { message: "Internal server error" } })
-    }
-
-    sendResponse(res, { data: task })
 }
