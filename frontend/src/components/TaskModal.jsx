@@ -31,11 +31,11 @@ export default function TaskModal({
         onClick={(e) => e.stopPropagation()}
         className="bg-white rounded-2xl p-6 shadow-xl w-[600px]"
       >
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-4xl font-bold text-blue-800">{modalTitle}</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">{modalTitle}</h1>
           <button
             onClick={closeModal}
-            className="w-7 h-7 text-gray-500 hover:text-white rounded-full hover:bg-blue-800  flex items-center justify-center cursor-pointer"
+            className="w-8 h-8 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl flex items-center justify-center cursor-pointer transition-all duration-200"
           >
             <X className="w-5 h-5" />
           </button>

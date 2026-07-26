@@ -1,4 +1,4 @@
-import { Calendar, Pencil, Trash, Loader2 } from "lucide-react";
+import { Calendar, Pencil, Trash, Loader2, Clock, Tag } from "lucide-react";
 import Button from "./Button";
 import { handleDelete } from "../utils/taskHandlers";
 import { useState } from "react";
@@ -70,52 +70,88 @@ export function TaskView({
 
   return (
     <div className="flex flex-col gap-4">
-      {dueDateFormatted && (
-        <span
-          className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${
-            isLate ? "bg-red-100 text-red-800" : "bg-blue-100 text-blue-800"
-          }`}
-        >
-          <Calendar className="w-4 h-4" />
-          {isLate ? dueDateFormatted : `Entregar ${dueDateFormatted}`}
-          {isLate && " (atrasado)"}
+      {/* Barra de Metadados / Datas */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500 pb-4 border-b border-gray-100">
+        <span className="flex items-center gap-1.5">
+          <Clock className="w-3.5 h-3.5 text-gray-400" />
+          Criada em {formattedDate} às {formattedTime}
         </span>
-      )}
-      <p className="text-gray-500 text-sm mt-1">
-        Criada em {formattedDate}, às {formattedTime}
-      </p>
-      {selectedTask.description && (
-        <p className="text-xl text-gray-600 mt-2">{selectedTask.description}</p>
-      )}
-      <div className="flex flex-wrap gap-2 mt-3">
-        {selectedTask.priority && (
+        {dueDateFormatted && (
           <span
-            className={`px-3 py-1 rounded-full text-sm font-medium ${
+            className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-semibold border ${
+              isLate
+                ? "bg-red-50 text-red-700 border-red-100"
+                : "bg-blue-50 text-blue-700 border-blue-100"
+            }`}
+          >
+            <Calendar className="w-3.5 h-3.5" />
+            {isLate ? `${dueDateFormatted} (atrasada)` : `Entregar ${dueDateFormatted}`}
+          </span>
+        )}
+      </div>
+
+      {/* Descrição da Tarefa */}
+      {selectedTask.description ? (
+        <div className="py-2">
+          <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+            Descrição
+          </h3>
+          <p className="text-gray-700 leading-relaxed font-light text-base bg-gray-50/50 p-4 rounded-xl border border-gray-100/80">
+            {selectedTask.description}
+          </p>
+        </div>
+      ) : (
+        <div className="py-2 text-gray-400 italic text-sm">
+          Sem descrição disponível.
+        </div>
+      )}
+
+      {/* Colunas de Status e Prioridade */}
+      <div className="grid grid-cols-2 gap-4 py-3 border-t border-gray-100">
+        <div>
+          <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+            Status
+          </h4>
+          <span className="inline-flex px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+            {statusMap[selectedTask.status].label}
+          </span>
+        </div>
+        <div>
+          <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+            Prioridade
+          </h4>
+          <span
+            className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${
               priorityMap[selectedTask.priority].bg
             } ${priorityMap[selectedTask.priority].text}`}
           >
             {priorityMap[selectedTask.priority].label}
           </span>
-        )}
-
-        {selectedTask.status && (
-          <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-            {statusMap[selectedTask.status].label}
-          </span>
-        )}
-
-        {selectedTask.tags &&
-          selectedTask.tags.length > 0 &&
-          selectedTask.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-800"
-            >
-              {tag}
-            </span>
-          ))}
+        </div>
       </div>
-      <div className="flex gap-3 justify-end">
+
+      {/* Seção de Tags */}
+      {selectedTask.tags && selectedTask.tags.length > 0 && (
+        <div className="py-3 border-t border-gray-100">
+          <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <Tag className="w-3.5 h-3.5" />
+            Tags
+          </h4>
+          <div className="flex flex-wrap gap-1.5">
+            {selectedTask.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-800"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Ações do Rodapé */}
+      <div className="flex gap-3 justify-end pt-4 border-t border-gray-100 mt-2">
         <div className="w-max">
           <Button
             onClick={onDelete}

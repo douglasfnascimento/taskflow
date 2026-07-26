@@ -9,24 +9,24 @@ export default function Button({
 }) {
   const colorMap = {
     blue: {
-      bg: "bg-blue-800",
-      hover: "hover:bg-blue-500",
+      bg: "bg-blue-600",
+      hover: "hover:bg-blue-700",
       textColor: "text-white",
     },
     red: {
-      bg: "bg-red-800",
-      hover: "hover:bg-red-500",
+      bg: "bg-red-500",
+      hover: "hover:bg-red-600",
       textColor: "text-white",
     },
     green: {
-      bg: "bg-green-800",
-      hover: "hover:bg-green-500",
+      bg: "bg-emerald-600",
+      hover: "hover:bg-emerald-700",
       textColor: "text-white",
     },
     white: {
-      bg: "bg-white",
-      hover: "hover:bg-gray-300",
-      textColor: "text-blue-800",
+      bg: "bg-white border border-gray-300",
+      hover: "hover:bg-gray-50",
+      textColor: "text-gray-700",
     },
   };
 
@@ -40,12 +40,12 @@ export default function Button({
         currentColor.bg,
         currentColor.hover,
         currentColor.textColor,
-        "min-w-max py-1 px-3 rounded-xl flex items-center gap-2 cursor-pointer",
-        "transition-colors duration-200 focus:outline-none font-semibold"
+        "min-w-max h-10 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-sm text-sm",
+        "transition-colors duration-200 focus:outline-none font-semibold whitespace-nowrap"
       )}
     >
       <span>{text}</span>
-      {Icon && <Icon className="w-4 h-4 font-semibold" />}
+      {Icon && <Icon className="w-4.5 h-4.5 font-semibold" />}
     </button>
   );
 }

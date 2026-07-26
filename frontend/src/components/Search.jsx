@@ -12,10 +12,10 @@ export default function Search({ onSearchChange }) {
 
   function handleIcon() {
     const className =
-      "absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400";
+      "absolute right-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 cursor-pointer hover:text-gray-600 transition-colors z-10";
 
     if (searchInput === "") {
-      return <SearchInput className={className} />;
+      return <SearchInput className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 pointer-events-none" />;
     } else {
       return (
         <X
@@ -30,13 +30,13 @@ export default function Search({ onSearchChange }) {
   }
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-xs">
       <input
         value={searchInput}
         onChange={(e) => handleSearch(e)}
-        className="min-w-57 bg-white border italic border-gray-400 rounded-xl px-4 py-2 text-gray-700 placeholder-gray-400"
+        className="w-full h-10 bg-white border border-gray-300 rounded-xl pl-4 pr-10 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm text-sm"
         type="text"
-        placeholder="título, descrição ou tag"
+        placeholder="Buscar tarefa..."
       />
       {handleIcon()}
     </div>

@@ -8,13 +8,14 @@ export default function TaskItem({
   onView,
   fetchTasks,
   showToast,
+  onChipClick,
 }) {
   function Button({ onClick, ariaLabel, Icon }) {
     return (
       <button
         onClick={onClick}
         aria-label={ariaLabel}
-        className="cursor-pointer p-1.5 rounded bg-blue-200 text-blue-800 hover:bg-blue-800 hover:text-white transition-colors"
+        className="cursor-pointer p-2 rounded-xl bg-white text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-all border border-gray-200 shadow-sm"
       >
         <Icon className="w-4 h-4" />
       </button>
@@ -22,9 +23,14 @@ export default function TaskItem({
   }
 
   return (
-    <div className="bg-white p-10 rounded-3xl shadow mb-4 relative group">
+    <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 mb-4 relative group">
       {/* Botões */}
-      <div className="absolute top-6 right-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+      <div className="absolute top-6 right-6 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+        <Button
+          onClick={() => onView(task)}
+          ariaLabel="Visualizar tarefa"
+          Icon={Eye}
+        />
         <Button
           onClick={() => onEdit(task)}
           ariaLabel="Editar tarefa"
@@ -36,11 +42,6 @@ export default function TaskItem({
           }}
           ariaLabel="Deletar tarefa"
           Icon={Trash}
-        />
-        <Button
-          onClick={() => onView(task)}
-          ariaLabel="Visualizar tarefa"
-          Icon={Eye}
         />
       </div>
 
@@ -58,58 +59,71 @@ export default function TaskItem({
 
           return (
             <span
-              className={`inline-flex items-center gap-1  rounded-full mb-3 text-sm font-medium ${
-                isPast ? " text-red-800" : " text-blue-500"
+              className={`inline-flex items-center gap-1.5 rounded-full mb-3 text-xs font-semibold px-2.5 py-0.5 border ${
+                isPast
+                  ? "bg-red-50 text-red-700 border-red-100"
+                  : "bg-blue-50 text-blue-700 border-blue-100"
               }`}
             >
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-3.5 h-3.5" />
               {formattedDate.replace(".", "").trim()}
             </span>
           );
         })()}
 
       {/* Título */}
-      <h2 className="text-blue-800 text-4xl mb-4 font-bold">{task.title}</h2>
+      <h2
+        onClick={() => onView(task)}
+        className="text-gray-900 text-2xl mb-2 font-extrabold cursor-pointer hover:text-blue-600 transition-colors block w-fit tracking-tight"
+      >
+        {task.title}
+      </h2>
 
       {/* Descrição */}
       {task.description && (
-        <p className="text-xl my-4 text-gray-500 font-light">
+        <p className="text-gray-500 text-sm mb-4 font-normal leading-relaxed max-w-2xl">
           {task.description}
         </p>
       )}
 
-      <hr className="border-t border-gray-300 rounded my-2 mb-5" />
+      {/* Divisor Mudo */}
+      <div className="h-px bg-gray-100 w-full my-4" />
 
       {/* Chips: prioridade, status, tags */}
       <div className="flex flex-wrap gap-2">
         {/* Prioridade */}
         {task.priority && (
-          <span
-            className={`px-3 py-1 rounded-full text-sm font-medium ${
+          <button
+            onClick={() => onChipClick?.("priority", priorityMap[task.priority].label.toLowerCase())}
+            className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer hover:opacity-85 transition-opacity ${
               priorityMap[task.priority].bg
             } ${priorityMap[task.priority].text}`}
           >
             {priorityMap[task.priority].label}
-          </span>
+          </button>
         )}
 
         {/* Status */}
         {task.status && (
-          <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+          <button
+            onClick={() => onChipClick?.("status", statusMap[task.status].label.toLowerCase())}
+            className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 cursor-pointer hover:bg-blue-200 hover:text-blue-900 transition-colors"
+          >
             {statusMap[task.status].label}
-          </span>
+          </button>
         )}
 
         {/* Tags */}
         {task.tags &&
           task.tags.length > 0 &&
           task.tags.map((tag, index) => (
-            <span
+            <button
               key={index}
-              className="px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-800"
+              onClick={() => onChipClick?.("tags", tag)}
+              className="px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-800 cursor-pointer hover:bg-gray-300 hover:text-gray-900 transition-colors"
             >
               {tag}
-            </span>
+            </button>
           ))}
       </div>
     </div>

@@ -14,19 +14,6 @@
     "createdAt": "2025-09-21T10:00:00.000Z"
   },
   {
-    "title": "Planejar viagem de fim de semana",
-    "description": "Pesquisar hotéis, definir roteiro e orçamento.",
-    "status": "todo",
-    "priority": 3,
-    "tags": [
-      "pessoal",
-      "viagem"
-    ],
-    "dueDate": "2025-10-05T00:00:00.000Z",
-    "id": "6",
-    "createdAt": "2025-09-21T12:00:00.000Z"
-  },
-  {
     "title": "Reunião com equipe de marketing",
     "description": "Discutir novas campanhas e revisar métricas.",
     "status": "todo",
@@ -124,5 +111,19 @@
     "dueDate": "2025-09-27T19:00:00.000Z",
     "id": "20",
     "createdAt": "2025-09-21T14:00:00.000Z"
+  },
+  {
+    "title": "Fazer deploy do meu portfólio",
+    "description": "Adicionar meus projetos e fazer o deploy na Vercel.",
+    "status": "todo",
+    "priority": 3,
+    "tags": [
+      "deploy",
+      "site",
+      "portfolio"
+    ],
+    "dueDate": "2026-07-31T00:00:00.000Z",
+    "createdAt": "2026-07-26T04:41:55.203Z",
+    "id": "1785040915203-wjp1wx"
   }
 ]

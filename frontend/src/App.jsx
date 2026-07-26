@@ -18,6 +18,7 @@ function App() {
   const [selectedFilters, setSelectedFilters] = useState({
     priority: [],
     status: [],
+    tags: [],
   });
   const [sortOrder, setSortOrder] = useState(() => {
     return localStorage.getItem("taskSortOrder") || "recent";
@@ -126,8 +127,18 @@ function App() {
     localStorage.setItem("taskSortOrder", sortOrder);
   }, [sortOrder]);
 
-  function onFilterChange(selectedFilters) {
-    setSelectedFilters(selectedFilters);
+  function handleChipClick(category, value) {
+    setSelectedFilters((prev) => {
+      const currentArray = prev[category] || [];
+      const isSelected = currentArray.includes(value);
+
+      return {
+        ...prev,
+        [category]: isSelected
+          ? currentArray.filter((v) => v !== value)
+          : [...currentArray, value],
+      };
+    });
   }
 
   useEffect(() => {
@@ -148,13 +159,19 @@ function App() {
       );
     }
 
+    if (selectedFilters.tags && selectedFilters.tags.length > 0) {
+      filtered = filtered.filter((task) =>
+        task.tags?.some((tag) => selectedFilters.tags.includes(tag))
+      );
+    }
+
     setFilteredTasks(filtered);
   }, [selectedFilters, tasks]);
 
   console.log(tasks);
 
   return (
-    <div className="bg-blue-50 min-h-screen p-3">
+    <div className="bg-gradient-to-tr from-slate-100 to-blue-50 min-h-screen px-4 py-8 md:px-8">
       <Header />
       {loading && <p>Carregando...</p>}
       {error && <p> Erro: {error}</p>}
@@ -163,7 +180,9 @@ function App() {
         onSearchChange={onSearchChange}
         onToggleOrder={onToggleOrder}
         sortOrder={sortOrder}
-        onFilterChange={onFilterChange}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+        tasks={tasks}
       />
       <TaskModal
         isOpen={showModal}
@@ -182,12 +201,17 @@ function App() {
           onView={onView}
           fetchTasks={fetchTasks}
           showToast={showToast}
+          onChipClick={handleChipClick}
         />
       ) : (
-        <p className="text-center text-2xl text-gray-500 mt-60 max-w-[60%] mx-auto">
-          Você ainda não tem tarefas cadastradas. Clique em "nova tarefa +" para
-          criar uma.
-        </p>
+        <div className="text-center max-w-4xl mx-auto mt-20 bg-white/50 backdrop-blur-sm border-2 border-dashed border-gray-300 p-16 rounded-2xl shadow-sm">
+          <p className="text-gray-500 font-medium text-lg mb-1">
+            Nenhuma tarefa cadastrada
+          </p>
+          <p className="text-gray-400 text-sm">
+            Clique em "Nova tarefa" acima para criar sua primeira tarefa.
+          </p>
+        </div>
       )}
 
       {
