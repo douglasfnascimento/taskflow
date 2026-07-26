@@ -26,10 +26,6 @@ export function validateTaskData({ title, description, status, priority, tags, d
         if (isNaN(date.getTime())) {
             throw new Error("Field 'dueDate' is invalid")
         }
-        const now = new Date()
-        if (date.getTime() <= now.getTime()) {
-            throw new Error("Field 'dueDate' must be a future date")
-        }
         d = date.toISOString()
     }
 

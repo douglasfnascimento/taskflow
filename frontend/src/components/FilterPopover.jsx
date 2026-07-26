@@ -2,7 +2,7 @@ import { Filter, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Button from "./Button";
 
-export default function FilterPopover({ selectedFilters, setSelectedFilters, tasks = [] }) {
+export default function FilterPopover({ selectedFilters, setSelectedFilters, tasks = [], sortOrder, onToggleOrder }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const popoverRef = useRef(null);
 
@@ -58,7 +58,6 @@ export default function FilterPopover({ selectedFilters, setSelectedFilters, tas
   // Calcular contagem de filtros ativos
   const activeFiltersCount =
     (selectedFilters.priority?.length || 0) +
-    (selectedFilters.status?.length || 0) +
     (selectedFilters.tags?.length || 0);
 
   return (
@@ -108,23 +107,18 @@ export default function FilterPopover({ selectedFilters, setSelectedFilters, tas
             ></Chips>
           </div>
           
-          <h2 className="text-blue-800 font-bold mb-2">Status</h2>
+          <h2 className="text-blue-800 font-bold mb-2">Ordenação</h2>
           <div className="flex gap-2 mb-4">
             <Chips
-              text="a fazer"
-              isSelected={selectedFilters.status?.includes("a fazer")}
-              onClick={() => toggleFilter("status", "a fazer")}
-            ></Chips>
+              text="Mais recentes"
+              isSelected={sortOrder === "recent"}
+              onClick={sortOrder !== "recent" ? onToggleOrder : undefined}
+            />
             <Chips
-              text="fazendo"
-              isSelected={selectedFilters.status?.includes("fazendo")}
-              onClick={() => toggleFilter("status", "fazendo")}
-            ></Chips>
-            <Chips
-              text="concluído"
-              isSelected={selectedFilters.status?.includes("concluída")}
-              onClick={() => toggleFilter("status", "concluída")}
-            ></Chips>
+              text="Mais antigas"
+              isSelected={sortOrder === "oldest"}
+              onClick={sortOrder !== "oldest" ? onToggleOrder : undefined}
+            />
           </div>
 
           {/* Seção de Tags */}
@@ -149,7 +143,6 @@ export default function FilterPopover({ selectedFilters, setSelectedFilters, tas
               onClick={() =>
                 setSelectedFilters({
                   priority: [],
-                  status: [],
                   tags: [],
                 })
               }

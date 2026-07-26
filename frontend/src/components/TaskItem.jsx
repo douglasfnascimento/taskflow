@@ -1,5 +1,5 @@
-import { Clock, Trash, Pencil, Eye, Calendar } from "lucide-react";
-import { handleDelete } from "../utils/taskHandlers";
+import { Calendar, Trash, Pencil, Play, CheckCheck } from "lucide-react";
+import { handleDelete, handleQuickStatus } from "../utils/taskHandlers";
 import { priorityMap, statusMap } from "../utils/constants.js";
 
 export default function TaskItem({
@@ -10,12 +10,13 @@ export default function TaskItem({
   showToast,
   onChipClick,
 }) {
-  function Button({ onClick, ariaLabel, Icon }) {
+  function Button({ onClick, ariaLabel, Icon, title, extraClass = "" }) {
     return (
       <button
         onClick={onClick}
         aria-label={ariaLabel}
-        className="cursor-pointer p-2 rounded-xl bg-white text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-all border border-gray-200 shadow-sm"
+        title={title}
+        className={`cursor-pointer p-2 rounded-xl bg-white text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-all border border-gray-200 shadow-sm ${extraClass}`}
       >
         <Icon className="w-4 h-4" />
       </button>
@@ -25,15 +26,29 @@ export default function TaskItem({
   return (
     <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 mb-4 relative group">
       {/* Botões */}
-      <div className="absolute top-6 right-6 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-        <Button
-          onClick={() => onView(task)}
-          ariaLabel="Visualizar tarefa"
-          Icon={Eye}
-        />
+      <div className="absolute top-6 right-6 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 bg-white/80 backdrop-blur-sm p-1 rounded-xl">
+        {task.status === "todo" && (
+          <Button
+            onClick={() => handleQuickStatus(task, "doing", fetchTasks, showToast)}
+            ariaLabel="Começar tarefa"
+            title="Começar tarefa"
+            Icon={Play}
+            extraClass="hover:!bg-orange-50 hover:!text-orange-600 hover:!border-orange-200"
+          />
+        )}
+        {task.status === "doing" && (
+          <Button
+            onClick={() => handleQuickStatus(task, "done", fetchTasks, showToast)}
+            ariaLabel="Concluir tarefa"
+            title="Concluir tarefa"
+            Icon={CheckCheck}
+            extraClass="hover:!bg-green-50 hover:!text-green-600 hover:!border-green-200"
+          />
+        )}
         <Button
           onClick={() => onEdit(task)}
           ariaLabel="Editar tarefa"
+          title="Editar tarefa"
           Icon={Pencil}
         />
         <Button
@@ -41,7 +56,9 @@ export default function TaskItem({
             handleDelete(task, fetchTasks, showToast);
           }}
           ariaLabel="Deletar tarefa"
+          title="Deletar tarefa"
           Icon={Trash}
+          extraClass="hover:!bg-red-50 hover:!text-red-600 hover:!border-red-200"
         />
       </div>
 

@@ -17,9 +17,9 @@ function App() {
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({
     priority: [],
-    status: [],
     tags: [],
   });
+  const [activeTab, setActiveTab] = useState("todo");
   const [sortOrder, setSortOrder] = useState(() => {
     return localStorage.getItem("taskSortOrder") || "recent";
   });
@@ -143,18 +143,17 @@ function App() {
 
   useEffect(() => {
     let filtered = tasks;
+    
+    // Filtro por Aba (Status)
+    if (activeTab !== "all") {
+      filtered = filtered.filter((task) => task.status === activeTab);
+    }
+
+    // Filtros Adicionais
     if (selectedFilters.priority.length > 0) {
       filtered = filtered.filter((task) =>
         selectedFilters.priority.includes(
           priorityMap[task.priority].label.toLowerCase()
-        )
-      );
-    }
-
-    if (selectedFilters.status.length > 0) {
-      filtered = filtered.filter((task) =>
-        selectedFilters.status.includes(
-          statusMap[task.status].label.toLowerCase()
         )
       );
     }
@@ -166,7 +165,7 @@ function App() {
     }
 
     setFilteredTasks(filtered);
-  }, [selectedFilters, tasks]);
+  }, [selectedFilters, activeTab, tasks]);
 
   console.log(tasks);
 
@@ -181,6 +180,8 @@ function App() {
         selectedFilters={selectedFilters}
         setSelectedFilters={setSelectedFilters}
         tasks={tasks}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
       />
       <TaskModal
         isOpen={showModal}

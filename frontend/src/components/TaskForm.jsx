@@ -14,6 +14,9 @@ export default function TaskForm({
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [titleError, setTitleError] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState(
+    mode === "create" ? "todo" : selectedTask?.status || "todo"
+  );
 
   useEffect(() => {
     if (mode === "edit" && selectedTask) {
@@ -173,7 +176,8 @@ export default function TaskForm({
             <select
               name="status"
               id="status"
-              defaultValue={mode === "create" ? "todo" : selectedTask?.status}
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
               disabled={mode === "create"}
               className={clsx(
                 "h-10 border border-gray-300 rounded-xl px-4 focus:outline-none appearance-none w-full pr-10 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-sm shadow-sm cursor-pointer",
@@ -201,8 +205,11 @@ export default function TaskForm({
               name="dueDate"
               id="dueDate"
               defaultValue={formattedDate}
-              min={new Date().toISOString().slice(0, 10)}
-              className="h-10 border border-gray-300 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all appearance-none w-full pr-10 text-sm shadow-sm cursor-pointer text-gray-700"
+              disabled={selectedStatus === "done"}
+              className={clsx(
+                "h-10 border border-gray-300 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all appearance-none w-full pr-10 text-sm shadow-sm cursor-pointer text-gray-700",
+                selectedStatus === "done" && "bg-gray-100 text-gray-400 opacity-70 cursor-not-allowed"
+              )}
             />
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
               <Calendar className="h-4 w-4 text-gray-400" />
