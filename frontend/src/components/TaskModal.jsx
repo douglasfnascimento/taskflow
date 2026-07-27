@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import TaskForm from "./TaskForm";
 import { X } from "lucide-react";
 import { TaskView } from "./TaskView";
@@ -11,6 +12,18 @@ export default function TaskModal({
   selectedTask,
   onEdit,
 }) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const modalTitle =
@@ -29,7 +42,7 @@ export default function TaskModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-2xl p-6 shadow-xl w-[600px]"
+        className="bg-white rounded-2xl p-6 shadow-xl w-full max-w-2xl mx-4 md:mx-auto max-h-[90vh] overflow-y-auto"
       >
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">{modalTitle}</h1>

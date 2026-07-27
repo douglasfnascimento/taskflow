@@ -12,9 +12,7 @@ export default function Header() {
           .
         </span>
       </div>
-      <p className="text-gray-400 text-xs md:text-sm font-normal mt-2 tracking-wide">
-        Organize suas tarefas com simplicidade e eficiência
-      </p>
+
     </div>
   );
 }

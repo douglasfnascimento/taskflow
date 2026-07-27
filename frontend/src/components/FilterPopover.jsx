@@ -25,6 +25,19 @@ export default function FilterPopover({ selectedFilters, setSelectedFilters, tas
     };
   }, [isPopoverOpen]);
 
+  // Bloquear rolagem da página quando o popover estiver aberto
+  useEffect(() => {
+    if (isPopoverOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isPopoverOpen]);
+
   function Chips({ text, isSelected, onClick }) {
     return (
       <button
@@ -63,15 +76,15 @@ export default function FilterPopover({ selectedFilters, setSelectedFilters, tas
   return (
     <div ref={popoverRef} className="relative flex items-stretch">
       <button
-        className="min-w-32 h-10 px-4 text-gray-700 bg-white border border-gray-300 rounded-xl flex items-center justify-between gap-2.5 cursor-pointer transition-all duration-200 hover:bg-gray-50 focus:outline-none shadow-sm text-sm whitespace-nowrap"
+        className="min-w-10 lg:min-w-32 h-10 px-3 lg:px-4 text-gray-700 bg-white border border-gray-300 rounded-xl flex items-center justify-center lg:justify-between gap-2.5 cursor-pointer transition-all duration-200 hover:bg-gray-50 focus:outline-none shadow-sm text-sm whitespace-nowrap"
         onClick={() => setIsPopoverOpen((prev) => !prev)}
         type="button"
       >
-        <span>Filtrar</span>
+        <span className="hidden lg:inline">Filtrar</span>
         <div className="flex gap-1.5 items-center">
           <Filter className="w-4 h-4 text-gray-500" />
           {activeFiltersCount > 0 && (
-            <span className="flex w-5 h-5 items-center justify-center rounded-full text-xs text-white bg-blue-500 font-bold">
+            <span className="flex w-5 h-5 items-center justify-center rounded-full text-xs text-white bg-blue-500 font-bold absolute lg:relative -top-2 -right-2 lg:top-0 lg:right-0">
               {activeFiltersCount}
             </span>
           )}
@@ -79,7 +92,7 @@ export default function FilterPopover({ selectedFilters, setSelectedFilters, tas
       </button>
 
       {isPopoverOpen && (
-        <div className="p-5 absolute rounded-2xl bg-white shadow-2xl w-80 h-auto top-full right-0 mt-2 z-50 border border-gray-100">
+        <div className="p-5 fixed left-4 right-4 max-w-sm mx-auto top-32 md:absolute md:left-auto md:right-0 md:top-full md:mx-0 md:w-80 h-auto mt-2 z-50 bg-white rounded-2xl shadow-2xl border border-gray-100">
           <button
             onClick={() => setIsPopoverOpen(false)}
             type="button"

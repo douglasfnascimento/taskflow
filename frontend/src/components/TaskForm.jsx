@@ -95,7 +95,7 @@ export default function TaskForm({
         {/* Título */}
         <div className="flex flex-col gap-1.5">
           <label htmlFor="title" className="text-sm font-semibold text-gray-700">
-            Título <span className="text-red-500">*</span>
+            Título
           </label>
           <input
             id="title"

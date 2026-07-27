@@ -6,6 +6,7 @@ export default function Button({
   Icon,
   color = "blue",
   type = "button",
+  hideTextOnMobile = false,
 }) {
   const colorMap = {
     blue: {
@@ -41,10 +42,11 @@ export default function Button({
         currentColor.hover,
         currentColor.textColor,
         "min-w-max h-10 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-sm text-sm",
-        "transition-colors duration-200 focus:outline-none font-semibold whitespace-nowrap"
+        "transition-colors duration-200 focus:outline-none font-semibold whitespace-nowrap",
+        hideTextOnMobile && "px-3 lg:px-4"
       )}
     >
-      <span>{text}</span>
+      <span className={clsx(hideTextOnMobile && "hidden lg:inline")}>{text}</span>
       {Icon && <Icon className="w-4.5 h-4.5 font-semibold" />}
     </button>
   );

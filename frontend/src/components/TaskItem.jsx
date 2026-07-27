@@ -13,20 +13,32 @@ export default function TaskItem({
   function Button({ onClick, ariaLabel, Icon, title, extraClass = "" }) {
     return (
       <button
-        onClick={onClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick(e);
+        }}
         aria-label={ariaLabel}
         title={title}
-        className={`cursor-pointer p-2 rounded-xl bg-white text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-all border border-gray-200 shadow-sm ${extraClass}`}
+        className={`cursor-pointer h-6 w-6 md:h-auto md:w-auto md:p-2 rounded-md md:rounded-xl bg-white text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-all border border-gray-200 shadow-sm flex items-center justify-center ${extraClass}`}
       >
-        <Icon className="w-4 h-4" />
+        <Icon className="w-3.5 h-3.5 md:w-4 md:h-4" />
       </button>
     );
   }
 
   return (
-    <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 mb-4 relative group">
+    <div 
+      onClick={() => onView(task)}
+      className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 mb-4 relative group cursor-pointer"
+    >
       {/* Botões */}
-      <div className="absolute top-6 right-6 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 bg-white/80 backdrop-blur-sm p-1 rounded-xl">
+      <div 
+        className={`flex gap-1.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 bg-white/80 backdrop-blur-sm p-1 rounded-xl ${
+          task.dueDate 
+            ? "absolute top-6 right-6" 
+            : "float-right ml-3 -mt-1 md:mt-0 md:absolute md:top-6 md:right-6"
+        }`}
+      >
         {task.status === "todo" && (
           <Button
             onClick={() => handleQuickStatus(task, "doing", fetchTasks, showToast)}
@@ -76,7 +88,7 @@ export default function TaskItem({
 
           return (
             <span
-              className={`inline-flex items-center gap-1.5 rounded-full mb-3 text-xs font-semibold px-2.5 py-0.5 border ${
+              className={`inline-flex items-center h-6 gap-1.5 rounded-full mb-3 text-xs font-semibold px-2.5 border ${
                 isPast
                   ? "bg-red-50 text-red-700 border-red-100"
                   : "bg-blue-50 text-blue-700 border-blue-100"
@@ -90,8 +102,7 @@ export default function TaskItem({
 
       {/* Título */}
       <h2
-        onClick={() => onView(task)}
-        className="text-gray-900 text-2xl mb-2 font-extrabold cursor-pointer hover:text-blue-600 transition-colors block w-fit tracking-tight"
+        className="text-gray-900 text-2xl mb-2 font-extrabold group-hover:text-blue-600 transition-colors block tracking-tight"
       >
         {task.title}
       </h2>
@@ -111,7 +122,10 @@ export default function TaskItem({
         {/* Prioridade */}
         {task.priority && (
           <button
-            onClick={() => onChipClick?.("priority", priorityMap[task.priority].label.toLowerCase())}
+            onClick={(e) => {
+              e.stopPropagation();
+              onChipClick?.("priority", priorityMap[task.priority].label.toLowerCase());
+            }}
             className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer hover:opacity-85 transition-opacity ${
               priorityMap[task.priority].bg
             } ${priorityMap[task.priority].text}`}
@@ -123,7 +137,10 @@ export default function TaskItem({
         {/* Status */}
         {task.status && (
           <button
-            onClick={() => onChipClick?.("status", statusMap[task.status].label.toLowerCase())}
+            onClick={(e) => {
+              e.stopPropagation();
+              onChipClick?.("status", statusMap[task.status].label.toLowerCase());
+            }}
             className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 cursor-pointer hover:bg-blue-200 hover:text-blue-900 transition-colors"
           >
             {statusMap[task.status].label}
@@ -136,7 +153,10 @@ export default function TaskItem({
           task.tags.map((tag, index) => (
             <button
               key={index}
-              onClick={() => onChipClick?.("tags", tag)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onChipClick?.("tags", tag);
+              }}
               className="px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-800 cursor-pointer hover:bg-gray-300 hover:text-gray-900 transition-colors"
             >
               {tag}
