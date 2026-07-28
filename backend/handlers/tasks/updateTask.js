@@ -24,10 +24,11 @@ export async function updateTask(req, res, id) {
     }
 
     try {
+        const userId = req.user.id;
         const query = `
             UPDATE tasks
             SET title = $1, description = $2, priority = $3, status = $4, tags = $5, "dueDate" = $6
-            WHERE id = $7
+            WHERE id = $7 AND user_id = $8
             RETURNING *
         `;
         const values = [
@@ -37,7 +38,8 @@ export async function updateTask(req, res, id) {
             finalData.status || 'todo',
             finalData.tags || [],
             finalData.dueDate || null,
-            id
+            id,
+            userId
         ];
 
         const { rows } = await pool.query(query, values);

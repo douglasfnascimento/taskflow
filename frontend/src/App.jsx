@@ -6,8 +6,11 @@ import TaskControls from "./components/TaskControls.jsx";
 import TaskModal from "./components/TaskModal.jsx";
 import Toast from "./components/Toast.jsx";
 import { priorityMap, statusMap } from "./utils/constants.js";
+import Login from "./components/Login.jsx";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState("");
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,6 +32,15 @@ function App() {
     type: "success",
   });
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedUsername = localStorage.getItem("username");
+    if (token) {
+      setIsAuthenticated(true);
+      if (storedUsername) setUsername(storedUsername);
+    }
+  }, []);
+
   async function fetchTasks() {
     setLoading(true);
     try {
@@ -40,14 +52,34 @@ function App() {
       }
     } catch (err) {
       setError(err.message);
+      // Se der erro de não autorizado (401), desloga o usuário
+      if (err.message.includes("Não autorizado")) {
+        handleLogout();
+      }
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    if (isAuthenticated) {
+      fetchTasks();
+    }
+  }, [isAuthenticated]);
+
+  function handleLoginSuccess() {
+    setIsAuthenticated(true);
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) setUsername(storedUsername);
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setIsAuthenticated(false);
+    setUsername("");
+    setTasks([]);
+  }
 
   function openModal() {
     setShowModal(true);
@@ -167,11 +199,13 @@ function App() {
     setFilteredTasks(filtered);
   }, [selectedFilters, activeTab, tasks]);
 
-  console.log(tasks);
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={handleLoginSuccess} />;
+  }
 
   return (
     <div className="bg-gradient-to-tr from-slate-100 to-blue-50 min-h-screen px-4 py-8 md:px-8">
-      <Header />
+      <Header onLogout={handleLogout} username={username} />
       <TaskControls
         onAddTask={onAddTask}
         onSearchChange={onSearchChange}

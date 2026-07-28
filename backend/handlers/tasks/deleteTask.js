@@ -7,12 +7,13 @@ export async function deleteTask(req, res, id) {
     }
 
     try {
+        const userId = req.user.id;
         const query = `
             DELETE FROM tasks
-            WHERE id = $1
+            WHERE id = $1 AND user_id = $2
             RETURNING *
         `;
-        const { rows } = await pool.query(query, [id]);
+        const { rows } = await pool.query(query, [id, userId]);
 
         if (rows.length === 0) {
             return sendResponse(res, { statusCode: 404, data: { "message": "Task doesn't exist" } });

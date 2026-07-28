@@ -10,9 +10,11 @@ export async function createTask(req, res) {
         const parsedBody = await parseJSONBody(req);
         const data = sanitizeInput(validateTaskData(parsedBody));
 
+        const userId = req.user.id;
+
         const query = `
-            INSERT INTO tasks (id, title, description, priority, status, tags, "dueDate")
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            INSERT INTO tasks (id, title, description, priority, status, tags, "dueDate", user_id)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING *
         `;
 
@@ -23,8 +25,10 @@ export async function createTask(req, res) {
             data.priority,
             data.status || 'todo',
             data.tags || [],
-            data.dueDate || null
+            data.dueDate || null,
+            userId
         ];
+
 
         const { rows } = await pool.query(query, values);
         const newTask = rows[0];
