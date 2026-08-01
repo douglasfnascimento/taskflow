@@ -9,7 +9,7 @@ Um gerenciador de tarefas *full stack* focado em produtividade e design minimali
 O **taskflow.** é um sistema que permite aos usuários gerenciar suas tarefas diárias de forma eficiente. O seu backend foi feito do zero utilizando o módulo nativo `http` do Node.js, sem a utilização de frameworks tradicionais como o Express. 
 
 
-## ✨ Funcionalidades
+## ✨ Funcionalidadesso
 
 - **Autenticação segura (stateless):** sistema de login e registro próprio usando senhas criptografadas (Bcrypt) e Sessões via JSON Web Tokens (JWT).
 - **Isolamento de dados:** cada usuário tem acesso exclusivo ao seu próprio quadro de tarefas (Multi-tenant básico via `user_id`).
