@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
-import { getTasks } from "./services/api.js";
+import { getTasks, checkHealth } from "./services/api.js";
 import TaskControls from "./components/TaskControls.jsx";
 import TaskModal from "./components/TaskModal.jsx";
 import Toast from "./components/Toast.jsx";
@@ -33,6 +33,9 @@ function App() {
   });
 
   useEffect(() => {
+    // Warm-up ping silencioso para despertar o backend se estivesse dormindo
+    checkHealth();
+
     const token = localStorage.getItem("token");
     const storedUsername = localStorage.getItem("username");
     if (token) {

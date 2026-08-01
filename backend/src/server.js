@@ -17,8 +17,10 @@ const server = createServer(async (req, res) => {
         return sendResponse(res, { statusCode: 204 })
     }
 
-    // Rotas públicas (Autenticação)
-    if (req.url === '/auth/register' && req.method === 'POST') {
+    // Rotas públicas (Autenticação e Health Check)
+    if (req.url === '/health' && req.method === 'GET') {
+        return sendResponse(res, { statusCode: 200, data: { status: 'ok' } })
+    } else if (req.url === '/auth/register' && req.method === 'POST') {
         return await register(req, res)
     } else if (req.url === '/auth/login' && req.method === 'POST') {
         return await login(req, res)

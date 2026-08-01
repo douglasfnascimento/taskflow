@@ -9,6 +9,15 @@ function getHeaders() {
     };
 }
 
+export async function checkHealth() {
+    try {
+        const response = await fetch(`${API_URL}/health`);
+        return response.ok;
+    } catch {
+        return false;
+    }
+}
+
 export async function login(username, password) {
     try {
         const response = await fetch(`${API_URL}/auth/login`, {
